@@ -1,0 +1,285 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="sea.goethe.sportpas.TipePertama" >
+
+    <RelativeLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primaryColor"
+        android:paddingBottom="10dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingTop="10dp" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="3dp" >
+
+            <TextView
+                android:id="@+id/txtWaktu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Zeit  "
+                android:textColor="@color/whiteColor" />
+
+            <TextView
+                android:id="@+id/textMenit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_border_waktu"
+                android:padding="3dp"
+                android:text="00"
+                android:textColor="#000" />
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:layout_marginLeft="3dp"
+                android:textColor="@color/whiteColor" />
+
+            <TextView
+                android:id="@+id/textDetik"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:background="@drawable/bg_border_waktu"
+                android:padding="3dp"
+                android:text="00"
+                android:textColor="#000" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textLevel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="Stufe 1"
+            android:background="@drawable/bg_stufe"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:paddingLeft="18dp"
+            android:paddingRight="18dp"
+            android:textColor="@color/whiteColor" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout1"
+        android:background="@drawable/bg_pattern"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp" >
+
+        <ImageView
+            android:id="@+id/imgSoal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:padding="7dp"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/textSoal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/hoverColor"
+            android:textStyle="bold" />
+
+        <GridView
+            android:id="@+id/listJawaban"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btnWeiter"
+            android:layout_below="@+id/textSoal"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:choiceMode="singleChoice"
+            android:horizontalSpacing="10dp"
+            android:numColumns="2"
+            android:visibility="invisible"
+            android:verticalSpacing="10dp" >
+        </GridView>
+        
+        <ListView
+            android:id="@+id/listJawabanb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btnWeiter"
+            android:layout_below="@+id/garisPembatas"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:visibility="invisible"
+            android:divider="@null"
+            android:dividerHeight="10dp" >
+        </ListView>
+        
+        <Button
+            android:id="@+id/btnWeiter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/btn_blue_rounded"
+            android:text="Weiter"
+            android:textColor="#FFF" />
+        
+        <!-- Ini untuk true false -->
+
+        <LinearLayout
+            android:id="@+id/garisPembatas"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_alignLeft="@+id/listJawaban"
+            android:layout_below="@+id/textSoal"
+            android:layout_marginTop="5dp"
+            android:background="@color/hoverColor"
+            android:orientation="vertical"
+            android:visibility="invisible" >
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textHint"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/garisPembatas"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="wenn die obige Aussage wahr?"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/groupTF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/listJawaban"
+            android:layout_below="@+id/textHint"
+            android:layout_above="@+id/btnWeiter"
+            android:visibility="invisible"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingTop="25dp" >
+
+            <RadioButton
+                android:id="@+id/radioTrue"
+                android:background="@drawable/bg_true"
+                android:button="@null"
+                android:text="Richtig"
+                android:textColor="#33b473"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:layout_marginRight="35dp" />
+
+            <RadioButton
+                android:id="@+id/radioFalse"
+                android:background="@drawable/bg_false"
+                android:button="@null"
+                android:text="Fälsch"
+                android:textColor="#980105"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="20dp"
+                android:layout_marginLeft="35dp" />
+        </RadioGroup>
+
+        <ImageButton
+            android:id="@+id/btnSpeak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/garisPembatas"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_speak"
+            android:visibility="invisible" />
+
+        <LinearLayout
+            android:id="@+id/bagianSpeak"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnSpeak"
+            android:background="#e4e4e4"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:padding="15dp"
+            android:layout_marginTop="10dp"
+            android:visibility="invisible" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:orientation="vertical"
+                android:gravity="center" >
+
+                <TextView
+                    android:id="@+id/speakPerintah"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="11sp"
+                    android:textColor="@color/blackColor"
+                    android:text="Sprich die Bilder oder Fragen unten!" />
+
+                <TextView
+                    android:id="@+id/speakSoal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Schwimmen"
+                    android:textColor="@color/blackColor"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imgSpeakStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/textJawabanScrabble"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/textHint"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/blackColor"
+            android:visibility="invisible"
+            android:ems="10" >
+
+            <requestFocus />
+        </EditText>
+
+        <LinearLayout
+            android:id="@+id/layoutScrabbleText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textJawabanScrabble"
+            android:layout_above="@+id/btnWeiter"
+            android:visibility="invisible"
+            android:orientation="horizontal" >
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

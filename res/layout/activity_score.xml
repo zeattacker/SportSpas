@@ -1,0 +1,114 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_score_asli"
+    tools:context="sea.goethe.glucklich.ScoreActivity" >
+
+    <!-- Toolbar -->
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <TextView
+        android:id="@+id/txtScoreText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:background="#33FFFFFF"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="Herzlichen Glückwunsch Sie das Quiz abgeschlossen haben"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#000" />
+
+    <ImageView
+        android:id="@+id/imgScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtScoreText"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/piala_kalah" />
+
+    <LinearLayout
+        android:id="@+id/bagianScore"
+        android:layout_below="@+id/imgScore"
+        android:background="@drawable/bg_score"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ihr Ergebnis"
+            android:textColor="#FFF" />
+
+        <LinearLayout
+            android:layout_width="2dp"
+            android:background="#FFF"
+            android:layout_margin="10dp"
+            android:layout_height="match_parent" >
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtScoreProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100"
+            android:textColor="#FFF"
+            android:textSize="50sp" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/bagianScore"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="#6E000000"
+        android:padding="20dp" >
+
+        <Button
+            android:id="@+id/btnProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/bg_blue_rounded"
+            android:drawableLeft="@drawable/icon_progress"
+            android:drawablePadding="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="10dp"
+            android:text="Fortschritt"
+            android:textColor="#FFF" />
+
+        <Button
+            android:id="@+id/btnLearn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/btnProgress"
+            android:layout_alignBottom="@+id/btnProgress"
+            android:background="@drawable/bg_blue_rounded"
+            android:drawableLeft="@drawable/img_menu"
+            android:drawablePadding="10dp"
+            android:layout_alignParentLeft="true"
+            android:paddingBottom="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dp"
+            android:text="Lernen"
+            android:textColor="#FFF" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

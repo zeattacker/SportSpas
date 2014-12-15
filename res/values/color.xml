@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primaryColor">#1b9ebc</color>
+    <color name="primaryColorDark">#0d6a7f</color>
+    <color name="backgroundColor">#f4f4f4</color>
+    <color name="hoverColor">#ff8401</color>
+    <color name="blackColor">#000000</color>
+    <color name="backgroundSidebar">#16aacc</color>
+    <color name="separatorColor">#0d94b3</color>
+    <color name="listPressedColor">#1491ae</color>
+    <color name="whiteColor">#ffffff</color>
+    <color name="greyColor">#dddcd8</color>
+    <color name="textDialog">#005e6d</color>
+    <color name="textGreyColor">#3f3f3f</color>
+    <color name="blueDarkColor">#0168b3</color>
+    <color name="yellowColor">#fff200</color>
+    <color name="blueDarkStroke">#024b81</color>
+    <color name="blueWelcomeColor">#4dbdec</color>
+    <color name="redWelcomeColor">#ef5858</color>
+    <color name="greenWelcomeColor">#00c089</color>
+</resources>

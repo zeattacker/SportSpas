@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_pattern"
+    tools:context="sea.goethe.glucklich.MenuActivity">
+
+    <!-- Toolbar -->
+    <include layout="@layout/toolbar" android:id="@+id/toolbar" />
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:layout_below="@+id/toolbar"
+       android:paddingLeft="20dp"
+       android:paddingRight="20dp" >
+
+       <ImageView
+           android:id="@+id/imageView"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_alignParentTop="true"
+           android:layout_centerHorizontal="true"
+           android:layout_marginTop="10dp"
+           android:background="@drawable/img_logo" />
+
+       <TextView
+           android:id="@+id/txtTanggalProgress"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="10dp"
+           android:layout_centerHorizontal="true"
+           android:text="@string/application_title"
+           android:layout_below="@+id/imageView"
+           android:textAppearance="?android:attr/textAppearanceMedium"
+           android:textColor="@color/blackColor"
+           android:textStyle="bold" />
+
+       <TextView
+           android:id="@+id/txtScore"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_centerHorizontal="true"
+           android:layout_below="@+id/txtTanggalProgress"
+           android:text="@string/slogan_title"
+           android:textAppearance="?android:attr/textAppearanceSmall"
+           android:textColor="@color/blackColor" />
+
+       <LinearLayout
+           android:id="@+id/garisPembatas"
+           android:layout_width="match_parent"
+           android:layout_height="2dp"
+           android:layout_below="@+id/txtScore"
+           android:layout_centerHorizontal="true"
+           android:layout_marginTop="10dp"
+           android:background="@color/hoverColor"
+           android:orientation="vertical" >
+       </LinearLayout>
+
+       <ImageButton
+           android:id="@+id/btnLearn"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_centerHorizontal="true"
+           android:layout_centerVertical="true"
+           android:layout_below="@+id/garisPembatas"
+           android:layout_marginTop="10dp"
+           android:background="@drawable/menu_learn" />
+
+       <ImageButton
+           android:id="@+id/btnGame"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_below="@+id/btnLearn"
+           android:layout_centerHorizontal="true"
+           android:layout_centerVertical="true"
+           android:layout_marginTop="10dp"
+           android:background="@drawable/menu_quiz" />
+
+       <ImageButton
+           android:id="@+id/btnProgress"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_below="@+id/btnAbout"
+           android:layout_centerHorizontal="true"
+           android:layout_centerVertical="true"
+           android:layout_marginTop="10dp"
+           android:background="@drawable/menu_progress" />
+
+       <ImageButton
+           android:id="@+id/btnAbout"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_below="@+id/btnGame"
+           android:layout_centerHorizontal="true"
+           android:layout_centerVertical="true"
+           android:layout_marginTop="10dp"
+           android:background="@drawable/menu_about" />
+   </RelativeLayout>
+
+</RelativeLayout>

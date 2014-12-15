@@ -1,0 +1,42 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_pattern"
+    tools:context="sea.goethe.sportpas.LearnSportFragment" >
+
+    <!-- Toolbar -->
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:padding="20dp" >
+
+        <ListView
+            android:id="@+id/listSkor"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/btnUbung"
+            android:layout_centerHorizontal="true"
+            android:divider="@null"
+            android:dividerHeight="10dp"
+            android:layout_marginBottom="20dp" >
+        </ListView>
+
+        <Button
+            android:id="@+id/btnUbung"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/whiteColor"
+            android:background="@drawable/btn_blue_rounded"
+            android:text="Übung" />
+    </RelativeLayout>
+
+</RelativeLayout>
