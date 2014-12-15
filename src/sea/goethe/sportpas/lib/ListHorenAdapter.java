@@ -8,7 +8,6 @@ import sea.goethe.sportspas.model.HorenQuizModel;
 import android.app.Activity;
 import android.content.Context;
 import android.media.MediaPlayer;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +23,7 @@ public class ListHorenAdapter extends BaseAdapter {
 	private Activity activity;
 	private LayoutInflater inflater;
 	private List<HorenQuizModel> horenQuizList;
-	public static String isFilled = "belum";
+	public static boolean isFilled = false;
 	
 	public ListHorenAdapter(Activity act, List<HorenQuizModel> horenQuizList) {
 		// TODO Auto-generated constructor stub
@@ -71,14 +70,11 @@ public class ListHorenAdapter extends BaseAdapter {
 				if (actionId == EditorInfo.IME_ACTION_SEARCH ||
 			            actionId == EditorInfo.IME_ACTION_DONE ||
 			            event.getAction() == KeyEvent.ACTION_DOWN &&
-			            event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-			        if (!event.isShiftPressed()) {
-			           // the user is done typing.
-			        	isFilled = "sudah";
+			            event.getKeyCode() == KeyEvent.KEYCODE_ENTER){
+			        	isFilled = true;
 			        	if(txtHorenJawab.getText().toString().equalsIgnoreCase(hqm.getJawaban())){
 			        		imgHorenStatus.setBackgroundResource(R.drawable.img_answer_true);
 			        		TipePertama.score += 3;
-			        		Log.i("SCORE", TipePertama.score + "");
 			        		TipePertama.soundBenar.start();
 			        	} else {
 			        		imgHorenStatus.setBackgroundResource(R.drawable.img_answer_false);
@@ -86,8 +82,7 @@ public class ListHorenAdapter extends BaseAdapter {
 			        	}
 			        	
 			        	txtHorenJawab.setEnabled(false);
-			           return true; // consume.
-			        }                
+			           return true; // consume.               
 			    }
 				return false;
 			}

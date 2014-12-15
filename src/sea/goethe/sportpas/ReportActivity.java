@@ -38,7 +38,7 @@ public class ReportActivity extends ActionBarActivity {
 		btnMenu = (Button) findViewById(R.id.btnMenu);
 		bagianShare = (LinearLayout) findViewById(R.id.btnShare);
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-		toolbar.setTitle("Progress Report");
+		toolbar.setTitle("Tätigkeitsbericht");
 
 		bagianShare.setOnClickListener(new View.OnClickListener() {
 

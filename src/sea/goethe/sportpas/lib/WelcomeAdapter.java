@@ -102,12 +102,12 @@ public class WelcomeAdapter extends PagerAdapter {
 			// TODO Auto-generated method stub
 			
 			//Multiple Choice Gambar
-			dh.addMP(new MultipleQuizModel("Fuﬂball", "10", "img_sport_4",
-					"img_alat_5", "img_alat_2", "img_sport_7", 3, "gambar"));
+			dh.addMP(new MultipleQuizModel("Fuﬂball", "10", "img_sport_7",
+					"img_alat_5", "img_alat_2", "img_sport_4", 0, "gambar"));
 			dh.addMP(new MultipleQuizModel("Surfbrett", "10", "img_alat_3",
-					"img_sport_1", "img_sport_4", "img_sport_3", 2, "gambar"));
+					"img_sport_3", "img_sport_1", "img_sport_4", 3, "gambar"));
 			dh.addMP(new MultipleQuizModel("Laufen", "10", "img_alat_3",
-					"img_alat_5", "img_alat_7", "img_sport_2", 3, "gambar"));
+					"img_sport_2", "img_alat_7", "img_alat_5", 1, "gambar"));
 			dh.addMP(new MultipleQuizModel("Schwimmen", "10", "img_alat_3",
 					"img_sport_5", "img_sport_3", "img_alat_8", 1, "gambar"));
 			dh.addMP(new MultipleQuizModel("Tennis", "10", "img_sport_6",
@@ -136,21 +136,22 @@ public class WelcomeAdapter extends PagerAdapter {
 			dh.addMP(new MultipleQuizModel("img_sport_4","10","Schach","Laufschuhe","Surfen","Surfbretter",2,"text"));
 			
 			//True Or False Text
-			dh.addTF(new TFQuizModel("img_alat_1", "Federball is used for Tennis", 1));
-			dh.addTF(new TFQuizModel("img_alat_1", "Federball is used for Tennis", 1));
-			dh.addTF(new TFQuizModel("img_alat_1", "Federball is used for Tennis", 1));
-			dh.addTF(new TFQuizModel("img_alat_1", "Federball is used for Tennis", 1));
-			dh.addTF(new TFQuizModel("img_alat_1", "Federball is used for Tennis", 1));
-			dh.addTF(new TFQuizModel("img_alat_1", "Federball is used for Tennis", 1));
-			dh.addTF(new TFQuizModel("img_alat_1", "Federball is used for Tennis", 1));
-			dh.addTF(new TFQuizModel("img_alat_1", "Federball is used for Tennis", 1));
-			dh.addTF(new TFQuizModel("img_alat_1", "Federball is used for Tennis", 1));
-			dh.addTF(new TFQuizModel("img_alat_1", "Federball is used for Tennis", 1));
+			dh.addTF(new TFQuizModel("img_alat_7", "Ball f¸r Fuﬂball genutzt", 0));
+			dh.addTF(new TFQuizModel("img_alat_7", "Ball f¸r Fuﬂball genutzt 2", 0));
+			dh.addTF(new TFQuizModel("img_sport_5", "Das Spiel Fuﬂball 3", 1));
+			dh.addTF(new TFQuizModel("img_sport_5", "Das Spiel Fuﬂball 4", 1));
+			dh.addTF(new TFQuizModel("img_alat_7", "Ball f¸r Fuﬂball genutzt 5", 0));
+			dh.addTF(new TFQuizModel("img_alat_7", "Ball f¸r Fuﬂball genutzt 6", 0));
+			dh.addTF(new TFQuizModel("img_sport_5", "Das Spiel Fuﬂball", 1));
+			dh.addTF(new TFQuizModel("img_sport_5", "Das Spiel Fuﬂball 8", 1));
+			dh.addTF(new TFQuizModel("img_alat_7", "Ball f¸r Fuﬂball genutzt 9", 0));
+			dh.addTF(new TFQuizModel("img_sport_5", "Das Spiel Fuﬂball 10", 1));
 			
 			// Horen Text
-			dh.addHoren(new HorenQuizModel("soal_horen_1", "Lorem"));
-			dh.addHoren(new HorenQuizModel("soal_horen_1", "Lorem"));
-			dh.addHoren(new HorenQuizModel("soal_horen_1", "Lorem"));
+			dh.addHoren(new HorenQuizModel("soal_horen_1", "A"));
+			dh.addHoren(new HorenQuizModel("soal_horen_1", "B"));
+			dh.addHoren(new HorenQuizModel("soal_horen_1", "C"));
+			
 			return null;
 		}
 

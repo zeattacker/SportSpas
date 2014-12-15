@@ -134,7 +134,9 @@ public class TipePertama extends ActionBarActivity {
 
 						currentMQM = mqm.get(idnya);
 
-						if (idnya == 3 || idnya == 4) {
+						if(idnya == 0 || idnya == 1 || idnya == 2){
+							setQuestionView("gambar");
+						} else if (idnya == 3 || idnya == 4) {
 							setQuestionView("text");
 						} else if (idnya == 5 || idnya == 6) {
 							setQuestionView("truefalse");
@@ -144,8 +146,6 @@ public class TipePertama extends ActionBarActivity {
 							setQuestionView("horen");
 						} else if (idnya == 9) {
 							setQuestionView("speak");
-						} else {
-							setQuestionView("gambar");
 						}
 					} else {
 						Intent i = new Intent(TipePertama.this,
@@ -171,7 +171,9 @@ public class TipePertama extends ActionBarActivity {
 
 						currentMQMT = mqmt.get(idnya);
 
-						if (idnya == 3 || idnya == 4) {
+						if(idnya == 0 || idnya == 1 || idnya == 2){
+							setQuestionView("gambar");
+						} else if (idnya == 3 || idnya == 4) {
 							setQuestionView("text");
 						} else if (idnya == 5 || idnya == 6) {
 							setQuestionView("truefalse");
@@ -181,8 +183,6 @@ public class TipePertama extends ActionBarActivity {
 							setQuestionView("horen");
 						} else if (idnya == 9) {
 							setQuestionView("speak");
-						} else {
-							setQuestionView("gambar");
 						}
 					} else {
 						Intent i = new Intent(TipePertama.this,
@@ -203,14 +203,18 @@ public class TipePertama extends ActionBarActivity {
 						soundSalah.start();
 					}
 
-					if (idnya < dh.countRowTF()) {
+					if (idnya < dh.countRowMP("gambar")) {
 						if (idTFnya > -1) {
 							groupTF.clearCheck();
 						}
+						
+						idTFnya = -1;
 
 						currentTF = tqm.get(idnya);
 
-						if (idnya == 3 || idnya == 4) {
+						if(idnya == 0 || idnya == 1 || idnya == 2){
+							setQuestionView("gambar");
+						} else if (idnya == 3 || idnya == 4) {
 							setQuestionView("text");
 						} else if (idnya == 5 || idnya == 6) {
 							setQuestionView("truefalse");
@@ -220,8 +224,6 @@ public class TipePertama extends ActionBarActivity {
 							setQuestionView("horen");
 						} else if (idnya == 9) {
 							setQuestionView("speak");
-						} else {
-							setQuestionView("gambar");
 						}
 					} else {
 						Intent i = new Intent(TipePertama.this,
@@ -237,15 +239,18 @@ public class TipePertama extends ActionBarActivity {
 				} else if (!textJawabanScrabble.getText().toString()
 						.equalsIgnoreCase("")) {
 					if (textJawabanScrabble.getText().toString()
-							.equalsIgnoreCase("sch")) {
+							.equalsIgnoreCase("Schach")) {
 						score += 10;
 						soundBenar.start();
 					} else {
 						soundSalah.start();
 					}
 
-					if (idnya < dh.countRowTF()) {
-						if (idnya == 3 || idnya == 4) {
+					if (idnya < dh.countRowMP("gambar")) {
+						textJawabanScrabble.setText("");
+						if(idnya == 0 || idnya == 1 || idnya == 2){
+							setQuestionView("gambar");
+						} else if (idnya == 3 || idnya == 4) {
 							setQuestionView("text");
 						} else if (idnya == 5 || idnya == 6) {
 							setQuestionView("truefalse");
@@ -255,8 +260,6 @@ public class TipePertama extends ActionBarActivity {
 							setQuestionView("horen");
 						} else if (idnya == 9) {
 							setQuestionView("speak");
-						} else {
-							setQuestionView("gambar");
 						}
 					} else {
 						Intent i = new Intent(TipePertama.this,
@@ -292,8 +295,11 @@ public class TipePertama extends ActionBarActivity {
 						}
 					}
 					
-					if(idnya < dh.countRowTF()){
-						if (idnya == 3 || idnya == 4) {
+					if(idnya < dh.countRowMP("gambar")){
+						hasilCakap = "";
+						if(idnya == 0 || idnya == 1 || idnya == 2){
+							setQuestionView("gambar");
+						} else if (idnya == 3 || idnya == 4) {
 							setQuestionView("text");
 						} else if (idnya == 5 || idnya == 6) {
 							setQuestionView("truefalse");
@@ -303,8 +309,33 @@ public class TipePertama extends ActionBarActivity {
 							setQuestionView("horen");
 						} else if (idnya == 9) {
 							setQuestionView("speak");
-						} else {
+						}
+					} else {
+						Intent i = new Intent(TipePertama.this,
+								ScoreActivity.class);
+						i.putExtra("SCORE", score);
+						i.putExtra("TIME",
+								textMenit.getText() + "" + textDetik.getText());
+						timeSwap += timeInMillies;
+						myHandler.removeCallbacks(updateTimerMethod);
+						startActivity(i);
+						finish();
+					}
+				} else if(ListHorenAdapter.isFilled){
+					if(idnya < dh.countRowMP("gambar")){
+						ListHorenAdapter.isFilled = false;
+						if(idnya == 0 || idnya == 1 || idnya == 2){
 							setQuestionView("gambar");
+						} else if (idnya == 3 || idnya == 4) {
+							setQuestionView("text");
+						} else if (idnya == 5 || idnya == 6) {
+							setQuestionView("truefalse");
+						} else if (idnya == 7) {
+							setQuestionView("scrabble");
+						} else if (idnya == 8) {
+							setQuestionView("horen");
+						} else if (idnya == 9) {
+							setQuestionView("speak");
 						}
 					} else {
 						Intent i = new Intent(TipePertama.this,
@@ -526,6 +557,7 @@ public class TipePertama extends ActionBarActivity {
 
 			// yang ditampilkan
 			imgSoal.setVisibility(View.VISIBLE);
+			imgSoal.setBackgroundResource(R.drawable.img_sport_3);
 			RelativeLayout.LayoutParams ps = new RelativeLayout.LayoutParams(
 					ViewGroup.LayoutParams.WRAP_CONTENT,
 					ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -539,7 +571,7 @@ public class TipePertama extends ActionBarActivity {
 			layoutScrabbleText.setVisibility(View.VISIBLE);
 			layoutScrabbleText.setGravity(Gravity.CENTER);
 
-			String[] cobalagi = { "s", "c", "h", "w", "i", "m", "m" };
+			String[] cobalagi = { "S", "c", "z", "a", "w", "h", "m" };
 			final TextView tv[] = new TextView[cobalagi.length];
 
 			for (int i = 0; i < cobalagi.length; i++) {
@@ -636,7 +668,7 @@ public class TipePertama extends ActionBarActivity {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.GERMANY);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.GERMAN);
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
                 getString(R.string.speech_prompt));
         try {
