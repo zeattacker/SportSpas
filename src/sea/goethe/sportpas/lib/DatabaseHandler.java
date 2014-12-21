@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sea.goethe.sportspas.model.HorenQuizModel;
+import sea.goethe.sportspas.model.LearnModel;
 import sea.goethe.sportspas.model.MultipleQuizModel;
 import sea.goethe.sportspas.model.ScoreModel;
 import sea.goethe.sportspas.model.TFQuizModel;
@@ -24,6 +25,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private static final String TBL_TRUEFALSE = "truefalse";
 	private static final String TBL_SCORE = "score";
 	private static final String TBL_HOREN = "horen";
+	private static final String TBL_LEARN = "learn";
 
 	// KEY COLUMN
 	private static final String KEY_ID = "id";
@@ -35,11 +37,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private static final String KEY_SOAL = "soal";
 	private static final String KEY_POINT = "point";
 	private static final String KEY_TIPE = "tipe";
+	private static final String KEY_KATEGORI = "kategori";
 	private static final String KEY_SCORE = "score";
 	private static final String KEY_TGL = "tgl";
 	private static final String KEY_TIME = "time";
 	private static final String KEY_GAMBAR = "gambar";
 	private static final String KEY_MUSIC = "music";
+	private static final String KEY_KATA = "kata";
+	private static final String KEY_KALIMAT = "kalimat";
 
 	public DatabaseHandler(Context context) {
 		super(context, DB_NAME, null, DB_VERSION);
@@ -70,6 +75,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				+ " INTEGER PRIMARY KEY," + KEY_SCORE + " INTEGER," + KEY_TGL
 				+ " TEXT," + KEY_TIPE + " TEXT," + KEY_TIME + " TEXT" + ")";
 		db.execSQL(CREATE_TABLE_SCORE);
+
+		String CREATE_TABLE_LEARN = "CREATE TABLE " + TBL_LEARN + "(" + KEY_ID
+				+ " INTEGER PRIMARY KEY," + KEY_KATA + " TEXT," + KEY_KALIMAT
+				+ " TEXT," + KEY_GAMBAR + " TEXT," + KEY_MUSIC + " TEXT,"
+				+ KEY_KATEGORI + " TEXT," + KEY_TIPE + " TEXT" + ")";
+		db.execSQL(CREATE_TABLE_LEARN);
 	}
 
 	@Override
@@ -79,6 +90,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + TBL_TRUEFALSE);
 		db.execSQL("DROP TABLE IF EXISTS " + TBL_HOREN);
 		db.execSQL("DROP TABLE IF EXISTS " + TBL_SCORE);
+		db.execSQL("DROP TABLE IF EXISTS " + TBL_LEARN);
 
 		onCreate(db);
 	}
@@ -329,7 +341,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		// return contact list
 		return tfQuizList;
 	}
-	
+
 	public int countRowTF() {
 		int row = 0;
 		String selectQuery = "SELECT  * FROM " + TBL_TRUEFALSE;
@@ -384,5 +396,72 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 		// return contact list
 		return horenQuizList;
+	}
+
+	// Learn DAO
+	public void addLearn(LearnModel lm) {
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		ContentValues cv = new ContentValues();
+		cv.put(KEY_KATA, lm.getKata());
+		cv.put(KEY_KALIMAT, lm.getKalimat());
+		cv.put(KEY_GAMBAR, lm.getGambar());
+		cv.put(KEY_MUSIC, lm.getMusic());
+		cv.put(KEY_KATEGORI, lm.getKategori());
+		cv.put(KEY_TIPE, lm.getTipe());
+
+		db.insert(TBL_LEARN, null, cv);
+		db.close();
+	}
+
+	public void updateLearn(LearnModel lm) {
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		ContentValues cv = new ContentValues();
+		cv.put(KEY_KATA, lm.getKata());
+		cv.put(KEY_KALIMAT, lm.getKalimat());
+		cv.put(KEY_GAMBAR, lm.getGambar());
+		cv.put(KEY_MUSIC, lm.getMusic());
+		cv.put(KEY_KATEGORI, lm.getKategori());
+		cv.put(KEY_TIPE, lm.getTipe());
+
+		db.update(TBL_LEARN, cv, KEY_ID + " = ?",
+				new String[] { String.valueOf(lm.getID()) });
+	}
+
+	public List<LearnModel> getAllLearn(String kategori, String tipe) {
+		ArrayList<LearnModel> learnList = new ArrayList<LearnModel>();
+		String selectQuery = "";
+
+		if (kategori.equalsIgnoreCase("") && tipe.equalsIgnoreCase("")) {
+			selectQuery = "SELECT  * FROM " + TBL_LEARN;
+		} else {
+			selectQuery = "SELECT * FROM " + TBL_LEARN + " WHERE "
+					+ KEY_KATEGORI + " = '" + kategori + "' AND " + KEY_TIPE
+					+ " = '" + tipe + "'";
+		}
+
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery(selectQuery, null);
+
+		// looping through all rows and adding to list
+		if (cursor.moveToFirst()) {
+			do {
+				LearnModel learn = new LearnModel();
+				learn.setID(cursor.getInt(0));
+				learn.setKata(cursor.getString(1));
+				learn.setKalimat(cursor.getString(2));
+				learn.setGambar(cursor.getString(3));
+				learn.setMusic(cursor.getString(4));
+				learn.setKategori(cursor.getString(5));
+				learn.setTipe(cursor.getString(6));
+				// Adding contact to list
+
+				learnList.add(learn);
+			} while (cursor.moveToNext());
+		}
+
+		// return contact list
+		return learnList;
 	}
 }

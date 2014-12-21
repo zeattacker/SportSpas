@@ -27,19 +27,20 @@
     <string name="title_activity_tipe_kedua">TipeKedua</string>
     <string name="title_activity_score">ScoreActivity</string>
     <string name="title_activity_report">ReportActivity</string>
-    
-    
+
     <!-- START STRING APP -->
-    	<!-- SplashScreen -->
-    	<string name="application_title">Sport Spaß</string>
-    	<string name="slogan_title">Lernen, Versuchen, Lauften</string>
-    	
-    	<!-- Welcome Screen -->
-    	<string name="button_welcome_next">Jetzt spielen!</string>
-    	
-    	<!-- Speak Quiz -->
-    	<string name="speech_prompt">Sprich jetzt &#8230;</string>
-    	<string name="speech_not_supported">Sorry! Your device doesn\'t support speech input</string>
+    <!-- SplashScreen -->
+    <string name="application_title">Sport Spaß</string>
+    <string name="slogan_title">Lernen, Versuchen, Lauften</string>
+
+    <!-- Welcome Screen -->
+    <string name="button_welcome_next">Jetzt spielen!</string>
+
+    <!-- Speak Quiz -->
+    <string name="speech_prompt">Sprich jetzt &#8230;</string>
+    <string name="speech_not_supported">Sorry! Your device doesn\'t support speech input</string>
     <!-- END STRING APP -->
+
+    <string name="title_activity_learn_tab">LearnTabActivity</string>
 
 </resources>

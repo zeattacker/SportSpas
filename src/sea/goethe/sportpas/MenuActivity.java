@@ -31,9 +31,10 @@ public class MenuActivity extends ActionBarActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent i = new Intent(MenuActivity.this,
-						MainFrameActivity.class);
+						LearnFrameActivity.class);
 				i.putExtra("MENU", "learn");
 				startActivity(i);
+				overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
 			}
 		});
 
@@ -44,6 +45,7 @@ public class MenuActivity extends ActionBarActivity {
 				// TODO Auto-generated method stub
 				Intent i = new Intent(MenuActivity.this, TipePertama.class);
 				startActivity(i);
+				overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
 			}
 		});
 
@@ -53,9 +55,10 @@ public class MenuActivity extends ActionBarActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent i = new Intent(MenuActivity.this,
-						MainFrameActivity.class);
+						LearnFrameActivity.class);
 				i.putExtra("MENU", "about");
 				startActivity(i);
+				overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
 			}
 		});
 
@@ -66,6 +69,7 @@ public class MenuActivity extends ActionBarActivity {
 				// TODO Auto-generated method stub
 				Intent i = new Intent(MenuActivity.this, ReportActivity.class);
 				startActivity(i);
+				overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
 			}
 		});
 	}
@@ -88,4 +92,6 @@ public class MenuActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	
 }

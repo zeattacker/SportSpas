@@ -1,56 +1,59 @@
 package sea.goethe.sportpas;
 
+import sea.goethe.sportpas.lib.DatabaseHandler;
 import sea.goethe.sportpas.lib.ListLearnAdapter;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 
-
-public class LearnSportFragment extends ActionBarActivity {
+public class LearnSportFragment extends Fragment {
 	private ListView listLearn;
 	private ListLearnAdapter learnAdapter;
-	
+	private DatabaseHandler dh;
+	public LearnSportFragment() {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_learn_sport);
-		
-		listLearn = (ListView)findViewById(R.id.listSkor);
-		Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
-		
-		Intent i = getIntent();
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View v = inflater.inflate(R.layout.activity_learn_sport, container,
+				false);
+		listLearn = (ListView) v.findViewById(R.id.listSkor);
+		Button btnDialog = (Button)v.findViewById(R.id.btnDialog);
+		dh = new DatabaseHandler(getActivity());
+
+		Intent i = getActivity().getIntent();
 		String tipe = i.getStringExtra("TIPE");
-		
-		if(tipe.equalsIgnoreCase("sport"))
-			toolbar.setTitle("Sportarten");
-		else
-			toolbar.setTitle("Sportutensilien");
-		
-		learnAdapter = new ListLearnAdapter(this, tipe);
-		
+
+		learnAdapter = new ListLearnAdapter(getActivity(), dh.getAllLearn(getTag(), tipe));
+
 		listLearn.setAdapter(learnAdapter);
+		
+		btnDialog.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent(getActivity(),DialogFrameActivity.class);
+				startActivity(i);
+				getActivity().overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
+			}
+		});
+		return v;
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.menu, menu);
-		return true;
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		getActivity().overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
 	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
+	
+	
 }

@@ -69,7 +69,7 @@ public class ScoreActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent(ScoreActivity.this, MainFrameActivity.class);
+				Intent i = new Intent(ScoreActivity.this, LearnFrameActivity.class);
 				i.putExtra("MENU", "learn");
 				startActivity(i);
 				finish();

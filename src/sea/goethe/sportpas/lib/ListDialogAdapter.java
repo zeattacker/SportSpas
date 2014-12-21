@@ -19,7 +19,7 @@ public class ListDialogAdapter extends BaseAdapter {
 	private LayoutInflater inflater;
 	private TextToSpeech tts;
 	private String[] dialogCowok = {"Hallo Angela","Möchtest du mit mir spielen ?","Kein Problem. Treffen wir uns heute Nachmittag auf dem Schulhof?","Tschüss!"};
-	private String[] dialogCewek = {"Hallo Rama","Gerne, aber ich have noch nie Federball gespielt.","Okay, Rama","Tschüss!"};
+	private String[] dialogCewek = {"Hallo Rama","Gerne, aber ich habe noch nie Federball gespielt.","Okay, Rama","Tschüss!"};
 	
 	public ListDialogAdapter(Activity act) {
 		// TODO Auto-generated constructor stub
