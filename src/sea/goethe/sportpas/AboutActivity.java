@@ -1,22 +1,17 @@
 package sea.goethe.sportpas;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 
-public class AboutActivity extends Fragment {
-	public AboutActivity(){}
+public class AboutActivity extends ActionBarActivity {
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		View rootView = inflater.inflate(R.layout.activity_about, null);
-		
-		return rootView;
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_about);
+		Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+		toolbar.setTitle("About");
 	}
-	
-	
 }

@@ -9,6 +9,7 @@
 
     <include
         android:id="@+id/toolbar"
+        android:layout_width="match_parent"
         layout="@layout/toolbar" />
 
     <LinearLayout
@@ -32,7 +33,7 @@
             android:padding="5dp" >
 
             <ImageView
-                android:id="@+id/imageView1"
+                android:id="@+id/imgQuiz"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/img_share" />
@@ -104,25 +105,166 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
+        android:layout_below="@+id/linearLayout1"
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        android:layout_below="@+id/linearLayout1"
-        android:orientation="vertical" >
+        android:paddingTop="10dp" >
 
-        <ListView
-            android:id="@+id/listSkor"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/linearLayout1"
             android:layout_above="@+id/btnMenu"
-            android:divider="@null"
-            android:dividerHeight="3dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="10dp" >
+            android:layout_marginBottom="20dp"
+            android:background="#2ab9db"
+            android:orientation="vertical"
+            android:padding="10dp" >
+            
+            <!-- fa8001 -->
 
-        </ListView>
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your Skill"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#FFF" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="5dp"
+                android:background="#6dcff6"
+                android:orientation="vertical" >
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp" >
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="Lesen       "
+                    android:textColor="#fff" />
+
+                <ProgressBar
+                    android:id="@+id/pbBaca"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_toRightOf="@+id/textView2"
+                    android:layout_toLeftOf="@+id/txtPbBaca"/>
+
+                <TextView
+                    android:id="@+id/txtPbBaca"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="90%"
+                    android:textColor="#FFF"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" >
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="Schreiben"
+                    android:textColor="#fff" />
+
+                <ProgressBar
+                    android:id="@+id/pbTulis"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_toRightOf="@+id/textView2"
+                    android:layout_toLeftOf="@+id/txtPbTulis"/>
+
+                <TextView
+                    android:id="@+id/txtPbTulis"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="90%"
+                    android:textColor="#FFF"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" >
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="Hören       "
+                    android:textColor="#fff" />
+
+                <ProgressBar
+                    android:id="@+id/pbDengar"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_toRightOf="@+id/textView2"
+                    android:layout_toLeftOf="@+id/txtPbDengar"/>
+
+                <TextView
+                    android:id="@+id/txtPbDengar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="90%"
+                    android:textColor="#FFF"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" >
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="Sprechen "
+                    android:textColor="#fff" />
+
+                <ProgressBar
+                    android:id="@+id/pbSpeak"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_toRightOf="@+id/textView2"
+                    android:layout_toLeftOf="@+id/txtPbSpeak"/>
+
+                <TextView
+                    android:id="@+id/txtPbSpeak"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="90%"
+                    android:textColor="#FFF"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
+        </LinearLayout>
 
         <Button
             android:id="@+id/btnMenu"
@@ -157,7 +299,6 @@
             android:text="SPIELEN"
             android:textColor="#FFF"
             android:textSize="12sp" />
-
     </RelativeLayout>
 
 </RelativeLayout>

@@ -1,13 +1,14 @@
 package sea.goethe.sportpas.lib;
 
 import java.util.List;
+import java.util.Locale;
 
 import sea.goethe.sportpas.R;
 import sea.goethe.sportspas.model.LearnModel;
 import android.app.Activity;
 import android.content.Context;
-import android.media.AudioManager;
-import android.media.SoundPool;
+import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +20,7 @@ import android.widget.TextView;
 public class ListLearnAdapter extends BaseAdapter {
 	private Activity activity;
 	private LayoutInflater inflater;
-	String tipeLearn = "";
-	private int soundNya;
+	private TextToSpeech tts;
 	private List<LearnModel> learnList;
 
 	public ListLearnAdapter(Activity a, List<LearnModel> learnList) {
@@ -64,6 +64,25 @@ public class ListLearnAdapter extends BaseAdapter {
 				.findViewById(R.id.playNormal);
 		ImageButton playSlow = (ImageButton) convertView
 				.findViewById(R.id.playSlow);
+		
+		tts = new TextToSpeech(activity, new TextToSpeech.OnInitListener() {
+
+			@Override
+			public void onInit(int status) {
+				// TODO Auto-generated method stub
+				if (status == TextToSpeech.SUCCESS) {
+
+					int result = tts.setLanguage(Locale.GERMANY);
+
+					if (result == TextToSpeech.LANG_MISSING_DATA
+							|| result == TextToSpeech.LANG_NOT_SUPPORTED) {
+						Log.e("TTS", "This Language is not supported");
+					}
+				} else {
+					Log.e("TTS", "Initilization Failed!");
+				}
+			}
+		});
 
 		final LearnModel lm = learnList.get(position);
 		imgItem.setBackgroundResource(activity.getResources().getIdentifier(
@@ -75,23 +94,7 @@ public class ListLearnAdapter extends BaseAdapter {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				@SuppressWarnings("deprecation")
-				SoundPool sp = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
-
-				soundNya = sp.load(
-						activity,
-						activity.getResources().getIdentifier(lm.getMusic(),
-								"raw", activity.getPackageName()), 1);
-
-				sp.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
-
-					@Override
-					public void onLoadComplete(SoundPool soundPool,
-							int sampleId, int status) {
-						// TODO Auto-generated method stub
-						soundPool.play(soundNya, 1, 1, 0, 0, 1);
-					}
-				});
+				playAudio(lm.getKata());
 			}
 		});
 
@@ -100,27 +103,17 @@ public class ListLearnAdapter extends BaseAdapter {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				@SuppressWarnings("deprecation")
-				SoundPool sp = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
-
-				soundNya = sp.load(
-						activity,
-						activity.getResources().getIdentifier(lm.getMusic(),
-								"raw", activity.getPackageName()), 1);
-
-				sp.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
-
-					@Override
-					public void onLoadComplete(SoundPool soundPool,
-							int sampleId, int status) {
-						// TODO Auto-generated method stub
-						soundPool.play(soundNya, 1, 1, 0, 0, (float) 0.7);
-					}
-				});
+				playAudio(lm.getKalimat());
 			}
 		});
 
 		return convertView;
+	}
+	
+	@SuppressWarnings("deprecation")
+	private void playAudio(String text) {
+		tts.setSpeechRate((float) 1.0);
+		tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
 	}
 
 }

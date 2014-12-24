@@ -1,44 +1,61 @@
 package sea.goethe.sportpas;
 
-import java.util.List;
-
 import sea.goethe.sportpas.lib.DatabaseHandler;
-import sea.goethe.sportpas.lib.ListSkorAdapter;
-import sea.goethe.sportspas.model.ScoreModel;
+import sea.goethe.sportspas.model.ProgressModel;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class ReportActivity extends ActionBarActivity {
-	private ListSkorAdapter lsAdapter;
-	private ListView listSkor;
-	private List<ScoreModel> smList;
 	private DatabaseHandler dh;
-	private TextView textScore, textTime;
+	private TextView textScore, textTime,txtPbBaca,txtPbTulis,txtPbDengar,txtPbSpeak;
 	private LinearLayout bagianShare;
 	private Button btnUlang, btnMenu;
+	private ProgressBar pbBaca,pbTulis,pbDengar,pbSpeak;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_report);
-
-		listSkor = (ListView) findViewById(R.id.listSkor);
+		
 		textScore = (TextView) findViewById(R.id.txtScore);
 		textTime = (TextView) findViewById(R.id.txtTime);
 		btnUlang = (Button) findViewById(R.id.btnUlang);
 		btnMenu = (Button) findViewById(R.id.btnMenu);
 		bagianShare = (LinearLayout) findViewById(R.id.btnShare);
+		dh = new DatabaseHandler(getApplicationContext());
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		toolbar.setTitle("Tätigkeitsbericht");
+		
+		//bagian skill
+		txtPbBaca = (TextView)findViewById(R.id.txtPbBaca);
+		txtPbTulis = (TextView)findViewById(R.id.txtPbTulis);
+		txtPbDengar = (TextView)findViewById(R.id.txtPbDengar);
+		txtPbSpeak = (TextView)findViewById(R.id.txtPbSpeak);
+		pbBaca = (ProgressBar)findViewById(R.id.pbBaca);
+		pbBaca.setMax(100);
+		pbTulis = (ProgressBar)findViewById(R.id.pbTulis);
+		pbTulis.setMax(100);
+		pbDengar = (ProgressBar)findViewById(R.id.pbDengar);
+		pbDengar.setMax(100);
+		pbSpeak = (ProgressBar)findViewById(R.id.pbSpeak);
+		pbSpeak.setMax(100);
+		
+		ProgressModel pm = dh.getProgress(1);
+		txtPbBaca.setText(checkProgress(pm.getRead()));
+		txtPbTulis.setText(checkProgress(pm.getWrite()));
+		txtPbDengar.setText(checkProgress(pm.getListen()));
+		txtPbSpeak.setText(checkProgress(pm.getSpeak()));
+		pbBaca.setProgress(pm.getRead());
+		pbTulis.setProgress(pm.getWrite());
+		pbDengar.setProgress(pm.getListen());
+		pbSpeak.setProgress(pm.getSpeak());
 
 		bagianShare.setOnClickListener(new View.OnClickListener() {
 
@@ -79,8 +96,7 @@ public class ReportActivity extends ActionBarActivity {
 			}
 		});
 
-		dh = new DatabaseHandler(getApplicationContext());
-		smList = dh.getAllScore("");
+		
 		if (dh.getMaxScore() <= 0) {
 			textScore.setText("0");
 		} else {
@@ -95,28 +111,16 @@ public class ReportActivity extends ActionBarActivity {
 			String menit = dh.getMinTime().substring(0, 2);
 			textTime.setText(menit + ":" + detik);
 		}
-
-		lsAdapter = new ListSkorAdapter(this, smList);
-
-		listSkor.setAdapter(lsAdapter);
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.report, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
+	
+	private String checkProgress(int angka){
+		String hasil = "";
+		if(angka > 100){
+			hasil = "100%";
+		} else {
+			hasil = angka + "%";
 		}
-		return super.onOptionsItemSelected(item);
+		
+		return hasil;
 	}
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import sea.goethe.sportspas.model.HorenQuizModel;
 import sea.goethe.sportspas.model.LearnModel;
 import sea.goethe.sportspas.model.MultipleQuizModel;
+import sea.goethe.sportspas.model.ProgressModel;
 import sea.goethe.sportspas.model.ScoreModel;
 import sea.goethe.sportspas.model.TFQuizModel;
 import android.content.ContentValues;
@@ -26,6 +27,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private static final String TBL_SCORE = "score";
 	private static final String TBL_HOREN = "horen";
 	private static final String TBL_LEARN = "learn";
+	private static final String TBL_PROGRESS = "progress";
 
 	// KEY COLUMN
 	private static final String KEY_ID = "id";
@@ -45,6 +47,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private static final String KEY_MUSIC = "music";
 	private static final String KEY_KATA = "kata";
 	private static final String KEY_KALIMAT = "kalimat";
+	private static final String KEY_READ = "read";
+	private static final String KEY_WRITE = "write";
+	private static final String KEY_SPEAK = "speak";
+	private static final String KEY_LISTEN = "listen";
 
 	public DatabaseHandler(Context context) {
 		super(context, DB_NAME, null, DB_VERSION);
@@ -81,6 +87,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				+ " TEXT," + KEY_GAMBAR + " TEXT," + KEY_MUSIC + " TEXT,"
 				+ KEY_KATEGORI + " TEXT," + KEY_TIPE + " TEXT" + ")";
 		db.execSQL(CREATE_TABLE_LEARN);
+
+		String CREATE_TABLE_PROGRESS = "CREATE TABLE " + TBL_PROGRESS + "("
+				+ KEY_ID + " INTEGER PRIMARY KEY," + KEY_READ + " INTEGER,"
+				+ KEY_WRITE + " INTEGER," + KEY_LISTEN + " INTEGER,"
+				+ KEY_SPEAK + " INTEGER" + ")";
+		db.execSQL(CREATE_TABLE_PROGRESS);
 	}
 
 	@Override
@@ -91,6 +103,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + TBL_HOREN);
 		db.execSQL("DROP TABLE IF EXISTS " + TBL_SCORE);
 		db.execSQL("DROP TABLE IF EXISTS " + TBL_LEARN);
+		db.execSQL("DROP TABLE IF EXISTS " + TBL_PROGRESS);
 
 		onCreate(db);
 	}
@@ -464,4 +477,44 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		// return contact list
 		return learnList;
 	}
+	
+	//Progress DAO
+	public void addProgress(ProgressModel pm) {
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		ContentValues cv = new ContentValues();
+		cv.put(KEY_READ, pm.getRead());
+		cv.put(KEY_WRITE, pm.getWrite());
+		cv.put(KEY_LISTEN, pm.getListen());
+		cv.put(KEY_SPEAK, pm.getSpeak());
+
+		db.insert(TBL_PROGRESS, null, cv);
+		db.close();
+	}
+
+	public void updateProgress(ProgressModel pm) {
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		ContentValues cv = new ContentValues();
+		cv.put(KEY_READ, pm.getRead());
+		cv.put(KEY_WRITE, pm.getWrite());
+		cv.put(KEY_LISTEN, pm.getListen());
+		cv.put(KEY_SPEAK, pm.getSpeak());
+
+		db.update(TBL_PROGRESS, cv, KEY_ID + " = ?",
+				new String[] { String.valueOf(pm.getID()) });
+	}
+	
+	public ProgressModel getProgress(int id) {
+		SQLiteDatabase db = this.getReadableDatabase();
+
+		Cursor cursor = db.query(TBL_PROGRESS, new String[] { KEY_ID, KEY_READ,
+				KEY_WRITE, KEY_LISTEN, KEY_SPEAK }, KEY_ID + " = ?",
+				new String[] { String.valueOf(id) }, null, null, null, null);
+		if (cursor != null)
+			cursor.moveToFirst();
+
+		return new ProgressModel(cursor.getInt(0), cursor.getInt(cursor.getColumnIndex(KEY_READ)), cursor.getInt(cursor.getColumnIndex(KEY_WRITE)), cursor.getInt(cursor.getColumnIndex(KEY_LISTEN)), cursor.getInt(cursor.getColumnIndex(KEY_SPEAK)));
+	}
+	
 }

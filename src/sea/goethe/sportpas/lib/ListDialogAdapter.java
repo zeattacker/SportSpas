@@ -98,10 +98,9 @@ public class ListDialogAdapter extends BaseAdapter {
 		return convertView;
 	}
 	
-	@SuppressWarnings("deprecation")
 	private void playNormal(String text) {
 		tts.setSpeechRate((float) 1.0);
-		tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+		tts.speak(text, TextToSpeech.QUEUE_FLUSH, null,"");
 	}
 
 }

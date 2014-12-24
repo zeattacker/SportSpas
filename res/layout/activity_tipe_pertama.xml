@@ -40,8 +40,8 @@
                 android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=":"
                 android:layout_marginLeft="3dp"
+                android:text=":"
                 android:textColor="@color/whiteColor" />
 
             <TextView
@@ -61,14 +61,13 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="Stufe 1"
             android:background="@drawable/bg_stufe"
-            android:paddingTop="4dp"
             android:paddingBottom="4dp"
             android:paddingLeft="18dp"
             android:paddingRight="18dp"
+            android:paddingTop="4dp"
+            android:text="Stufe 1"
             android:textColor="@color/whiteColor" />
-
     </RelativeLayout>
 
     <RelativeLayout
@@ -79,10 +78,10 @@
         android:background="@drawable/bg_pattern"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingLeft="20dp"
-        android:paddingRight="20dp" >
+        android:paddingRight="20dp"
+        android:paddingTop="10dp" >
 
         <ImageView
             android:id="@+id/imgSoal"
@@ -109,14 +108,13 @@
             android:layout_below="@+id/textSoal"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            android:choiceMode="singleChoice"
             android:horizontalSpacing="10dp"
             android:numColumns="2"
-            android:visibility="invisible"
-            android:verticalSpacing="10dp" >
+            android:verticalSpacing="10dp"
+            android:visibility="invisible" >
         </GridView>
-        
-        <ListView
+
+        <ScrollView
             android:id="@+id/listJawabanb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -124,11 +122,166 @@
             android:layout_below="@+id/garisPembatas"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:visibility="invisible"
-            android:divider="@null"
-            android:dividerHeight="10dp" >
-        </ListView>
-        
+            android:visibility="invisible" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#e4e4e4"
+                    android:orientation="vertical"
+                    android:padding="15dp" >
+
+                    <ImageButton
+                        android:id="@+id/btnPlayHoren1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/bg_soundquiz" />
+
+                    <TextView
+                        android:id="@+id/divider"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/btnPlayHoren1"
+                        android:text=":"
+                        android:textColor="#000"
+                        android:textSize="40sp" />
+
+                    <EditText
+                        android:id="@+id/textHorenJawab1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_toLeftOf="@+id/imgHorenStatus1"
+                        android:layout_toRightOf="@+id/divider"
+                        android:ems="10"
+                        android:imeOptions="actionDone"
+                        android:singleLine="true"
+                        android:textColor="#000" >
+
+                        <requestFocus />
+                    </EditText>
+
+                    <ImageView
+                        android:id="@+id/imgHorenStatus1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true" />
+                </RelativeLayout>
+                
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#e4e4e4"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp"
+                    android:padding="15dp" >
+
+                    <ImageButton
+                        android:id="@+id/btnPlayHoren2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/bg_soundquiz" />
+
+                    <TextView
+                        android:id="@+id/divider"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/btnPlayHoren2"
+                        android:text=":"
+                        android:textColor="#000"
+                        android:textSize="40sp" />
+
+                    <EditText
+                        android:id="@+id/textHorenJawab2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_toLeftOf="@+id/imgHorenStatus2"
+                        android:layout_toRightOf="@+id/divider"
+                        android:ems="10"
+                        android:imeOptions="actionDone"
+                        android:singleLine="true"
+                        android:textColor="#000" >
+
+                        <requestFocus />
+                    </EditText>
+
+                    <ImageView
+                        android:id="@+id/imgHorenStatus2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true" />
+                </RelativeLayout>
+                
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#e4e4e4"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp"
+                    android:padding="15dp" >
+
+                    <ImageButton
+                        android:id="@+id/btnPlayHoren3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/bg_soundquiz" />
+
+                    <TextView
+                        android:id="@+id/divider"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/btnPlayHoren3"
+                        android:text=":"
+                        android:textColor="#000"
+                        android:textSize="40sp" />
+
+                    <EditText
+                        android:id="@+id/textHorenJawab3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_toLeftOf="@+id/imgHorenStatus3"
+                        android:layout_toRightOf="@+id/divider"
+                        android:ems="10"
+                        android:imeOptions="actionDone"
+                        android:singleLine="true"
+                        android:textColor="#000" >
+
+                        <requestFocus />
+                    </EditText>
+
+                    <ImageView
+                        android:id="@+id/imgHorenStatus3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true" />
+                </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
+
         <Button
             android:id="@+id/btnWeiter"
             android:layout_width="match_parent"
@@ -137,7 +290,7 @@
             android:background="@drawable/btn_blue_rounded"
             android:text="Weiter"
             android:textColor="#FFF" />
-        
+
         <!-- Ini untuk true false -->
 
         <LinearLayout
@@ -154,7 +307,6 @@
 
         <TextView
             android:id="@+id/textHint"
-            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/garisPembatas"
@@ -162,52 +314,53 @@
             android:layout_marginTop="10dp"
             android:text="wenn die obige Aussage wahr?"
             android:textColor="#000"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="invisible" />
 
         <RadioGroup
             android:id="@+id/groupTF"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_above="@+id/btnWeiter"
             android:layout_alignLeft="@+id/listJawaban"
             android:layout_below="@+id/textHint"
-            android:layout_above="@+id/btnWeiter"
-            android:visibility="invisible"
             android:gravity="center"
             android:orientation="horizontal"
             android:paddingBottom="10dp"
-            android:paddingTop="25dp" >
+            android:paddingTop="25dp"
+            android:visibility="invisible" >
 
             <RadioButton
                 android:id="@+id/radioTrue"
+                android:layout_marginRight="35dp"
                 android:background="@drawable/bg_true"
                 android:button="@null"
-                android:text="Richtig"
-                android:textColor="#33b473"
-                android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:layout_marginRight="35dp" />
+                android:paddingTop="10dp"
+                android:text="Richtig"
+                android:textColor="#33b473" />
 
             <RadioButton
                 android:id="@+id/radioFalse"
+                android:layout_marginLeft="35dp"
                 android:background="@drawable/bg_false"
                 android:button="@null"
-                android:text="Fälsch"
-                android:textColor="#980105"
-                android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:paddingLeft="25dp"
                 android:paddingRight="20dp"
-                android:layout_marginLeft="35dp" />
+                android:paddingTop="10dp"
+                android:text="Fälsch"
+                android:textColor="#980105" />
         </RadioGroup>
 
         <ImageButton
             android:id="@+id/btnSpeak"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_below="@+id/garisPembatas"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:background="@drawable/bg_speak"
             android:visibility="invisible" />
@@ -217,27 +370,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/btnSpeak"
+            android:layout_marginTop="10dp"
             android:background="#e4e4e4"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
             android:padding="15dp"
-            android:layout_marginTop="10dp"
             android:visibility="invisible" >
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
-                android:orientation="vertical"
-                android:gravity="center" >
+                android:gravity="center"
+                android:orientation="vertical" >
 
                 <TextView
                     android:id="@+id/speakPerintah"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="11sp"
+                    android:text="Sprich die Bilder oder Fragen unten!"
                     android:textColor="@color/blackColor"
-                    android:text="Sprich die Bilder oder Fragen unten!" />
+                    android:textSize="11sp" />
 
                 <TextView
                     android:id="@+id/speakSoal"
@@ -247,25 +400,30 @@
                     android:textColor="@color/blackColor"
                     android:textStyle="bold" />
 
+                <TextView
+                    android:id="@+id/yangDiomong"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/primaryColorDark"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <ImageView
                 android:id="@+id/imgSpeakStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-
         </LinearLayout>
 
         <EditText
             android:id="@+id/textJawabanScrabble"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_below="@+id/textHint"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
+            android:ems="10"
             android:textColor="@color/blackColor"
-            android:visibility="invisible"
-            android:ems="10" >
+            android:visibility="invisible" >
 
             <requestFocus />
         </EditText>
@@ -274,12 +432,11 @@
             android:id="@+id/layoutScrabbleText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textJawabanScrabble"
             android:layout_above="@+id/btnWeiter"
-            android:visibility="invisible"
-            android:orientation="horizontal" >
+            android:layout_below="@+id/textJawabanScrabble"
+            android:orientation="horizontal"
+            android:visibility="invisible" >
         </LinearLayout>
-
     </RelativeLayout>
 
 </RelativeLayout>

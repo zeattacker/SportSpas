@@ -66,6 +66,10 @@
             android:name=".LearnTabActivity"
             android:label="@string/title_activity_learn_tab" >
         </activity>
+        <activity
+            android:name=".SelectQuiz"
+            android:label="@string/title_activity_select_quiz" >
+        </activity>
     </application>
 
 </manifest>

@@ -31,6 +31,12 @@ public class SessionHandler {
 
 	// User name (make variable public to access from outside)
 	public static final String KEY_SESION = "session";
+	
+	// Quiz
+	public static final String KEY_QUIZ_LAND = "land_quiz";
+	public static final String KEY_QUIZ_WASSER = "wasser_quiz";
+	public static final String KEY_QUIZ_LUFT = "luft_quiz";
+	
 
 	// Constructor
 	public SessionHandler(Context context) {
@@ -53,6 +59,17 @@ public class SessionHandler {
 		editor.commit();
 	}
 
+	public void createQuizSession(String type){
+		if(type.equalsIgnoreCase("land")){
+			editor.putBoolean(KEY_QUIZ_LAND, true);
+		} else if(type.equalsIgnoreCase("wasser")){
+			editor.putBoolean(KEY_QUIZ_WASSER, true);
+		} else {
+			editor.putBoolean(KEY_QUIZ_LUFT, true);
+		}
+		
+		editor.commit();
+	}
 	/**
 	 * Check login method wil check user login status If false it will redirect
 	 * user to login page Else won't do anything
@@ -117,5 +134,21 @@ public class SessionHandler {
 	// Get Login State
 	public boolean isFirstTime() {
 		return pref.getBoolean(IS_FIRST, false);
+	}
+	
+	
+	/*
+	 * Quick check for quiz
+	 */
+	public boolean isLandDone(){
+		return pref.getBoolean(KEY_QUIZ_LAND, false);
+	}
+	
+	public boolean isWasserDone(){
+		return pref.getBoolean(KEY_QUIZ_WASSER, false);
+	}
+	
+	public boolean isLuftDone(){
+		return pref.getBoolean(KEY_QUIZ_LUFT, false);
 	}
 }

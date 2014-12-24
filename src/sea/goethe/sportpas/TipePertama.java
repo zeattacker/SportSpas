@@ -7,8 +7,8 @@ import java.util.Locale;
 import sea.goethe.sportpas.lib.ChoiceGambarAdapter;
 import sea.goethe.sportpas.lib.ChoiceTextAdapter;
 import sea.goethe.sportpas.lib.DatabaseHandler;
-import sea.goethe.sportpas.lib.ListHorenAdapter;
 import sea.goethe.sportspas.model.MultipleQuizModel;
+import sea.goethe.sportspas.model.ProgressModel;
 import sea.goethe.sportspas.model.TFQuizModel;
 import android.speech.RecognizerIntent;
 import android.support.v7.app.ActionBarActivity;
@@ -27,32 +27,34 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class TipePertama extends ActionBarActivity {
-	private ChoiceGambarAdapter cgAdapter;
-	private ListHorenAdapter horenAdapter;
+	private ChoiceGambarAdapter cgAdapter = new ChoiceGambarAdapter();
 	private GridView listJawaban;
 	private int idTFnya = -1;
 	private RadioGroup groupTF;
 	private Button btnWeiter;
 	private LinearLayout garisPembatas, bagianSpeak, layoutScrabbleText;
 	private ImageButton btnSpeak;
-	private TextView textSoal, textLevel, textMenit, textDetik, textHint, speakSoal;
-	private ImageView imgSoal,imgSpeakStatus;
+	private TextView textSoal, textLevel, textMenit, textDetik, textHint,
+			speakSoal;
+	private ImageView imgSoal, imgSpeakStatus;
 	private EditText textJawabanScrabble;
-	private ListView listjawabanb;
+	private ScrollView listjawabanb;
+	private boolean statusHoren = false;
 	public static int score = 0;
 	private DatabaseHandler dh;
 	private int idnya = 0;
@@ -76,6 +78,8 @@ public class TipePertama extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tipe_pertama);
 
+		score = 0;
+
 		dh = new DatabaseHandler(getApplicationContext());
 
 		startTime = SystemClock.uptimeMillis();
@@ -89,9 +93,6 @@ public class TipePertama extends ActionBarActivity {
 		currentMQMT = mqmt.get(idnya);
 		currentTF = tqm.get(idnya);
 
-		ChoiceGambarAdapter.mSelectedPosition = -1;
-		ChoiceTextAdapter.mSelectedPosition = -1;
-
 		listJawaban = (GridView) findViewById(R.id.listJawaban);
 		btnWeiter = (Button) findViewById(R.id.btnWeiter);
 		textSoal = (TextView) findViewById(R.id.textSoal);
@@ -102,7 +103,7 @@ public class TipePertama extends ActionBarActivity {
 		imgSoal = (ImageView) findViewById(R.id.imgSoal);
 		imgSpeakStatus = (ImageView) findViewById(R.id.imgSpeakStatus);
 		groupTF = (RadioGroup) findViewById(R.id.groupTF);
-		listjawabanb = (ListView) findViewById(R.id.listJawabanb);
+		listjawabanb = (ScrollView) findViewById(R.id.listJawabanb);
 		garisPembatas = (LinearLayout) findViewById(R.id.garisPembatas);
 		textHint = (TextView) findViewById(R.id.textHint);
 		btnSpeak = (ImageButton) findViewById(R.id.btnSpeak);
@@ -119,48 +120,31 @@ public class TipePertama extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if (ChoiceGambarAdapter.mSelectedPosition >= 0) {
-					if (ChoiceGambarAdapter.mSelectedPosition == currentMQM
-							.getBenar()) {
+				if (cgAdapter.getSelectedAnswer() >= 0) {
+					if (cgAdapter.getSelectedAnswer() == currentMQM.getBenar()) {
 						score += Integer.parseInt(currentMQM.getPoint());
 						soundBenar.start();
+						updateProgress(10, 5, 0, 0);
 					} else {
 						soundSalah.start();
 					}
 
 					if (idnya < dh.countRowMP("gambar")) {
 						jawabannya.clear();
-						ChoiceGambarAdapter.mSelectedPosition = -1;
+						cgAdapter.setSelectedAnswer(-1);
 
 						currentMQM = mqm.get(idnya);
 
-						if(idnya == 0 || idnya == 1 || idnya == 2){
-							setQuestionView("gambar");
-						} else if (idnya == 3 || idnya == 4) {
-							setQuestionView("text");
-						} else if (idnya == 5 || idnya == 6) {
-							setQuestionView("truefalse");
-						} else if (idnya == 7) {
-							setQuestionView("scrabble");
-						} else if (idnya == 8) {
-							setQuestionView("horen");
-						} else if (idnya == 9) {
-							setQuestionView("speak");
-						}
+						checkPosisiID();
 					} else {
-						Intent i = new Intent(TipePertama.this,
-								ScoreActivity.class);
-						i.putExtra("SCORE", score);
-						i.putExtra("TIME",
-								textMenit.getText() + "" + textDetik.getText());
-						startActivity(i);
-						finish();
+						pindahScore();
 					}
 				} else if (ChoiceTextAdapter.mSelectedPosition >= 0) {
 					if (ChoiceTextAdapter.mSelectedPosition == currentMQMT
 							.getBenar()) {
 						score += Integer.parseInt(currentMQMT.getPoint());
 						soundBenar.start();
+						updateProgress(10, 5, 0, 0);
 					} else {
 						soundSalah.start();
 					}
@@ -171,34 +155,15 @@ public class TipePertama extends ActionBarActivity {
 
 						currentMQMT = mqmt.get(idnya);
 
-						if(idnya == 0 || idnya == 1 || idnya == 2){
-							setQuestionView("gambar");
-						} else if (idnya == 3 || idnya == 4) {
-							setQuestionView("text");
-						} else if (idnya == 5 || idnya == 6) {
-							setQuestionView("truefalse");
-						} else if (idnya == 7) {
-							setQuestionView("scrabble");
-						} else if (idnya == 8) {
-							setQuestionView("horen");
-						} else if (idnya == 9) {
-							setQuestionView("speak");
-						}
+						checkPosisiID();
 					} else {
-						Intent i = new Intent(TipePertama.this,
-								ScoreActivity.class);
-						i.putExtra("SCORE", score);
-						i.putExtra("TIME",
-								textMenit.getText() + "" + textDetik.getText());
-						timeSwap += timeInMillies;
-						myHandler.removeCallbacks(updateTimerMethod);
-						startActivity(i);
-						finish();
+						pindahScore();
 					}
 				} else if (idTFnya > -1) {
 					if (idTFnya == currentTF.getJawaban()) {
 						score += Integer.parseInt(currentMQMT.getPoint());
 						soundBenar.start();
+						updateProgress(10, 5, 0, 0);
 					} else {
 						soundSalah.start();
 					}
@@ -207,34 +172,14 @@ public class TipePertama extends ActionBarActivity {
 						if (idTFnya > -1) {
 							groupTF.clearCheck();
 						}
-						
+
 						idTFnya = -1;
 
 						currentTF = tqm.get(idnya);
 
-						if(idnya == 0 || idnya == 1 || idnya == 2){
-							setQuestionView("gambar");
-						} else if (idnya == 3 || idnya == 4) {
-							setQuestionView("text");
-						} else if (idnya == 5 || idnya == 6) {
-							setQuestionView("truefalse");
-						} else if (idnya == 7) {
-							setQuestionView("scrabble");
-						} else if (idnya == 8) {
-							setQuestionView("horen");
-						} else if (idnya == 9) {
-							setQuestionView("speak");
-						}
+						checkPosisiID();
 					} else {
-						Intent i = new Intent(TipePertama.this,
-								ScoreActivity.class);
-						i.putExtra("SCORE", score);
-						i.putExtra("TIME",
-								textMenit.getText() + "" + textDetik.getText());
-						timeSwap += timeInMillies;
-						myHandler.removeCallbacks(updateTimerMethod);
-						startActivity(i);
-						finish();
+						pindahScore();
 					}
 				} else if (!textJawabanScrabble.getText().toString()
 						.equalsIgnoreCase("")) {
@@ -248,44 +193,29 @@ public class TipePertama extends ActionBarActivity {
 
 					if (idnya < dh.countRowMP("gambar")) {
 						textJawabanScrabble.setText("");
-						if(idnya == 0 || idnya == 1 || idnya == 2){
-							setQuestionView("gambar");
-						} else if (idnya == 3 || idnya == 4) {
-							setQuestionView("text");
-						} else if (idnya == 5 || idnya == 6) {
-							setQuestionView("truefalse");
-						} else if (idnya == 7) {
-							setQuestionView("scrabble");
-						} else if (idnya == 8) {
-							setQuestionView("horen");
-						} else if (idnya == 9) {
-							setQuestionView("speak");
-						}
+						updateProgress(10, 20, 0, 0);
+						checkPosisiID();
 					} else {
-						Intent i = new Intent(TipePertama.this,
-								ScoreActivity.class);
-						i.putExtra("SCORE", score);
-						i.putExtra("TIME",
-								textMenit.getText() + "" + textDetik.getText());
-						timeSwap += timeInMillies;
-						myHandler.removeCallbacks(updateTimerMethod);
-						startActivity(i);
-						finish();
+						pindahScore();
 					}
-				} else if (!hasilCakap.equalsIgnoreCase("")){
-					if(hasilCakap.equalsIgnoreCase(speakSoal.getText().toString())){
+				} else if (!hasilCakap.equalsIgnoreCase("")) {
+					if (hasilCakap.equalsIgnoreCase(speakSoal.getText()
+							.toString())) {
 						score += 10;
-						imgSpeakStatus.setBackgroundResource(R.drawable.img_answer_true);
+						imgSpeakStatus
+								.setBackgroundResource(R.drawable.img_answer_true);
 						soundBenar.start();
+						updateProgress(0, 0, 0, 85);
 						try {
 							Thread.sleep(2000);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						
+
 					} else {
-						imgSpeakStatus.setBackgroundResource(R.drawable.img_answer_false);
+						imgSpeakStatus
+								.setBackgroundResource(R.drawable.img_answer_false);
 						soundSalah.start();
 						try {
 							Thread.sleep(2000);
@@ -294,64 +224,24 @@ public class TipePertama extends ActionBarActivity {
 							e.printStackTrace();
 						}
 					}
-					
-					if(idnya < dh.countRowMP("gambar")){
+
+					if (idnya < dh.countRowMP("gambar")) {
 						hasilCakap = "";
-						if(idnya == 0 || idnya == 1 || idnya == 2){
-							setQuestionView("gambar");
-						} else if (idnya == 3 || idnya == 4) {
-							setQuestionView("text");
-						} else if (idnya == 5 || idnya == 6) {
-							setQuestionView("truefalse");
-						} else if (idnya == 7) {
-							setQuestionView("scrabble");
-						} else if (idnya == 8) {
-							setQuestionView("horen");
-						} else if (idnya == 9) {
-							setQuestionView("speak");
-						}
+						checkPosisiID();
 					} else {
-						Intent i = new Intent(TipePertama.this,
-								ScoreActivity.class);
-						i.putExtra("SCORE", score);
-						i.putExtra("TIME",
-								textMenit.getText() + "" + textDetik.getText());
-						timeSwap += timeInMillies;
-						myHandler.removeCallbacks(updateTimerMethod);
-						startActivity(i);
-						finish();
+						pindahScore();
 					}
-				} else if(ListHorenAdapter.isFilled){
-					if(idnya < dh.countRowMP("gambar")){
-						ListHorenAdapter.isFilled = false;
-						if(idnya == 0 || idnya == 1 || idnya == 2){
-							setQuestionView("gambar");
-						} else if (idnya == 3 || idnya == 4) {
-							setQuestionView("text");
-						} else if (idnya == 5 || idnya == 6) {
-							setQuestionView("truefalse");
-						} else if (idnya == 7) {
-							setQuestionView("scrabble");
-						} else if (idnya == 8) {
-							setQuestionView("horen");
-						} else if (idnya == 9) {
-							setQuestionView("speak");
-						}
+				} else if (statusHoren) {
+					if (idnya < dh.countRowMP("gambar")) {
+						updateProgress(0, 20, 10, 0);
+						checkPosisiID();
 					} else {
-						Intent i = new Intent(TipePertama.this,
-								ScoreActivity.class);
-						i.putExtra("SCORE", score);
-						i.putExtra("TIME",
-								textMenit.getText() + "" + textDetik.getText());
-						timeSwap += timeInMillies;
-						myHandler.removeCallbacks(updateTimerMethod);
-						startActivity(i);
-						finish();
+
 					}
 				} else {
 					Toast.makeText(getApplicationContext(),
-							"Noch keine Antwort gewählt",
-							Toast.LENGTH_SHORT).show();
+							"Noch keine Antwort gewählt", Toast.LENGTH_SHORT)
+							.show();
 				}
 			}
 		});
@@ -472,6 +362,7 @@ public class TipePertama extends ActionBarActivity {
 			garisPembatas.setVisibility(View.VISIBLE);
 			textHint.setVisibility(View.VISIBLE);
 			groupTF.setVisibility(View.VISIBLE);
+			textLevel.setText("Stufe " + (idnya + 1));
 			groupTF.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
 				@Override
@@ -509,11 +400,25 @@ public class TipePertama extends ActionBarActivity {
 			rps.setMargins(0, 10, 0, 5);
 			garisPembatas.setLayoutParams(rps);
 			garisPembatas.setVisibility(View.VISIBLE);
-			horenAdapter = new ListHorenAdapter(this, dh.getAllHoren());
-			ListView lv = (ListView) findViewById(R.id.listJawabanb);
-			lv.setVisibility(View.VISIBLE);
-			lv.setAdapter(horenAdapter);
+			listjawabanb.setVisibility(View.VISIBLE);
+			textLevel.setText("Stufe " + (idnya + 1));
 			groupTF.setVisibility(View.INVISIBLE);
+
+			// ini buat controller speak dan check nya
+			ImageButton btnPlayHoren1 = (ImageButton) findViewById(R.id.btnPlayHoren1);
+			ImageButton btnPlayHoren2 = (ImageButton) findViewById(R.id.btnPlayHoren2);
+			ImageButton btnPlayHoren3 = (ImageButton) findViewById(R.id.btnPlayHoren3);
+			final EditText txtHoren1 = (EditText) findViewById(R.id.textHorenJawab1);
+			final EditText txtHoren2 = (EditText) findViewById(R.id.textHorenJawab2);
+			final EditText txtHoren3 = (EditText) findViewById(R.id.textHorenJawab3);
+			final ImageView imgHoren1 = (ImageView) findViewById(R.id.imgHorenStatus1);
+			final ImageView imgHoren2 = (ImageView) findViewById(R.id.imgHorenStatus2);
+			final ImageView imgHoren3 = (ImageView) findViewById(R.id.imgHorenStatus3);
+
+			khususHoren(btnPlayHoren1, txtHoren1, imgHoren1);
+			khususHoren(btnPlayHoren2, txtHoren2, imgHoren2);
+			khususHoren(btnPlayHoren3, txtHoren3, imgHoren3);
+
 		} else if (tipe.equalsIgnoreCase("speak")) {
 			// yang dihilangkan
 			imgSoal.setVisibility(View.INVISIBLE);
@@ -537,9 +442,9 @@ public class TipePertama extends ActionBarActivity {
 			garisPembatas.setVisibility(View.VISIBLE);
 			btnSpeak.setVisibility(View.VISIBLE);
 			bagianSpeak.setVisibility(View.VISIBLE);
-			
+			textLevel.setText("Stufe " + (idnya + 1));
 			btnSpeak.setOnClickListener(new View.OnClickListener() {
-				
+
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
@@ -570,7 +475,7 @@ public class TipePertama extends ActionBarActivity {
 			textJawabanScrabble.setVisibility(View.VISIBLE);
 			layoutScrabbleText.setVisibility(View.VISIBLE);
 			layoutScrabbleText.setGravity(Gravity.CENTER);
-
+			textLevel.setText("Stufe " + (idnya + 1));
 			String[] cobalagi = { "S", "c", "z", "a", "w", "h", "m" };
 			final TextView tv[] = new TextView[cobalagi.length];
 
@@ -660,46 +565,127 @@ public class TipePertama extends ActionBarActivity {
 		}
 
 	};
-	
+
 	/**
-     * Showing google speech input dialog
-     * */
-    private void promptSpeechInput() {
-        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.GERMAN);
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
-                getString(R.string.speech_prompt));
-        try {
-            startActivityForResult(intent, 100);
-        } catch (ActivityNotFoundException a) {
-            Toast.makeText(getApplicationContext(),
-                    getString(R.string.speech_not_supported),
-                    Toast.LENGTH_SHORT).show();
-        }
-    }
- 
-    /**
-     * Receiving speech input
-     * */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
- 
-        switch (requestCode) {
-        case 100: {
-            if (resultCode == RESULT_OK && null != data) {
- 
-                ArrayList<String> result = data
-                        .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                hasilCakap = result.get(0);
-            }
-            break;
-        }
- 
-        }
-    }
- 
+	 * Showing google speech input dialog
+	 * */
+	private void promptSpeechInput() {
+		Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+		intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+				RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+		intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,
+				Locale.GERMANY.toString());
+		intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
+				getString(R.string.speech_prompt));
+		try {
+			startActivityForResult(intent, 100);
+		} catch (ActivityNotFoundException a) {
+			Toast.makeText(getApplicationContext(),
+					getString(R.string.speech_not_supported),
+					Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	/**
+	 * Receiving speech input
+	 * */
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+
+		switch (requestCode) {
+		case 100: {
+			if (resultCode == RESULT_OK && null != data) {
+
+				ArrayList<String> result = data
+						.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+				hasilCakap = result.get(0);
+				TextView tx = (TextView) findViewById(R.id.yangDiomong);
+				tx.setText(result.get(0));
+			}
+			break;
+		}
+
+		}
+	}
+
+	private void checkPosisiID() {
+		if (idnya == 0 || idnya == 1 || idnya == 2) {
+			setQuestionView("gambar");
+		} else if (idnya == 3 || idnya == 4) {
+			setQuestionView("text");
+		} else if (idnya == 5 || idnya == 6) {
+			setQuestionView("truefalse");
+		} else if (idnya == 7) {
+			setQuestionView("scrabble");
+		} else if (idnya == 8) {
+			setQuestionView("horen");
+		} else if (idnya == 9) {
+			setQuestionView("speak");
+		}
+	}
+
+	private void pindahScore() {
+		Intent i = new Intent(TipePertama.this, ScoreActivity.class);
+		i.putExtra("SCORE", score);
+		i.putExtra("TIME", textMenit.getText() + "" + textDetik.getText());
+		timeSwap += timeInMillies;
+		myHandler.removeCallbacks(updateTimerMethod);
+		startActivity(i);
+		finish();
+	}
+
+	private void khususHoren(ImageButton btnPlay, final EditText textHoren,
+			final ImageView imgHoren) {
+		btnPlay.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Toast.makeText(getApplicationContext(),
+						"Sound not found , the answer is : SportSpas",
+						Toast.LENGTH_SHORT).show();
+			}
+		});
+
+		textHoren
+				.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+
+					@Override
+					public boolean onEditorAction(TextView v, int actionId,
+							KeyEvent event) {
+						// TODO Auto-generated method stub
+						if (actionId == EditorInfo.IME_ACTION_SEARCH
+								|| actionId == EditorInfo.IME_ACTION_DONE
+								|| event.getAction() == KeyEvent.ACTION_DOWN
+								&& event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+							statusHoren = true;
+							if (textHoren.getText().toString()
+									.equalsIgnoreCase("SportSpas")) {
+								score += 4;
+								imgHoren.setBackgroundResource(R.drawable.img_answer_true);
+								soundBenar.start();
+
+								updateProgress(0, 10, 30, 0);
+							} else {
+								imgHoren.setBackgroundResource(R.drawable.img_answer_false);
+								soundSalah.start();
+							}
+
+							textHoren.setEnabled(false);
+						}
+						return false;
+					}
+				});
+	}
+	
+	private void updateProgress(int read,int write,int listen,int speak){
+		ProgressModel pm = dh.getProgress(1);
+		read += pm.getRead();
+		write += pm.getWrite();
+		listen += pm.getListen();
+		speak += pm.getSpeak();
+		dh.updateProgress(new ProgressModel(1,read, write, listen, speak));
+	}
 
 }

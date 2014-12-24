@@ -20,7 +20,7 @@ public class ChoiceGambarAdapter extends BaseAdapter{
 	private RadioButton btnSelect;
 	@SuppressWarnings("unused")
 	private RadioGroup btnSelectGroup;
-	public static int mSelectedPosition = -1;
+	public int mSelectedPosition = -1;
 	
 	public ChoiceGambarAdapter(Context c,ArrayList<String> jawabanQuiz) {
 		// TODO Auto-generated constructor stub
@@ -29,6 +29,10 @@ public class ChoiceGambarAdapter extends BaseAdapter{
 		btnSelectGroup = new RadioGroup(c);
 		inflater = (LayoutInflater)context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	}
+	
+	public ChoiceGambarAdapter() {
+		// TODO Auto-generated constructor stub
 	}
 	
 	@Override
@@ -50,6 +54,14 @@ public class ChoiceGambarAdapter extends BaseAdapter{
 	}
 	
 	
+	public int getSelectedAnswer(){
+		return this.mSelectedPosition;
+	}
+	
+	public void setSelectedAnswer(int id){
+		this.mSelectedPosition = id;
+	}
+	
 
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
@@ -66,8 +78,6 @@ public class ChoiceGambarAdapter extends BaseAdapter{
 		} else {
 			holder = (Holder)view.getTag();
 		}
-		
-		holder.radioButton.setChecked(false);
 		
 		holder.image.setBackgroundResource(context.getResources().getIdentifier(jawabanQuiz.get(position), "drawable", context.getPackageName()));
 		
@@ -90,7 +100,7 @@ public class ChoiceGambarAdapter extends BaseAdapter{
 		} else {
 			holder.radioButton.setChecked(true);
 			if(btnSelect != null && holder.radioButton != btnSelect){
-				btnSelect = holder.radioButton;
+				btnSelect = holder.radioButton;	
 			}
 		}
 		

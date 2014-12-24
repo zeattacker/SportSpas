@@ -61,8 +61,7 @@ public class ChoiceTextAdapter extends BaseAdapter{
 		} else {
 			holder = (Holder)view.getTag();
 		}
-		
-		holder.radioButton.setChecked(false);
+
 		holder.radioButton.setText(textJawaban.get(position));
 		
 		holder.radioButton.setOnClickListener(new View.OnClickListener() {

@@ -5,6 +5,7 @@ import sea.goethe.sportpas.R;
 import sea.goethe.sportspas.model.HorenQuizModel;
 import sea.goethe.sportspas.model.LearnModel;
 import sea.goethe.sportspas.model.MultipleQuizModel;
+import sea.goethe.sportspas.model.ProgressModel;
 import sea.goethe.sportspas.model.TFQuizModel;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -192,10 +193,12 @@ public class WelcomeAdapter extends PagerAdapter {
 					"sound_sport_10", "air", "sport"));
 			dh.addLearn(new LearnModel("das Schnorcheln", "Ich bin Schnorcheln", "img_sport_11",
 					"sound_sport_11", "air", "sport"));
-			dh.addLearn(new LearnModel("das Luftballon", "", "img_sport_12",
+			dh.addLearn(new LearnModel("das Luftballon", "Ich spiele Luftballon", "img_sport_12",
 					"sound_sport_12", "udara", "sport"));
-			dh.addLearn(new LearnModel("das Gleitschirmfliegen", "", "img_sport_13",
+			dh.addLearn(new LearnModel("das Gleitschirmfliegen", "Ich spiele Gleitschirmfliegen", "img_sport_13",
 					"sound_sport_13", "udara", "sport"));
+			dh.addLearn(new LearnModel("das Segelflugzeug", "Ich spiele Segelflugzeug", "img_sport_14",
+					"sound_sport_14", "udara", "sport"));
 
 			// Add learn Alat
 			dh.addLearn(new LearnModel("der Federball", "Ich leihe der Federball", "img_alat_1",
@@ -220,6 +223,15 @@ public class WelcomeAdapter extends PagerAdapter {
 					"sound_alat_10", "air", "alat"));
 			dh.addLearn(new LearnModel("der Schwimmgürtel", "Ich leihe Schwimmer", "img_alat_11",
 					"sound_alat_11", "air", "alat"));
+			dh.addLearn(new LearnModel("das Segelflugzeug", "ich kaufe Segelflugzeug", "img_alat_12",
+					"sound_alat_12", "udara", "alat"));
+			dh.addLearn(new LearnModel("der Flugzeug", "Ich kaufe Flugzeug", "img_alat_13",
+					"sound_alat_13", "udara", "alat"));
+			dh.addLearn(new LearnModel("der Heißluftballon", "Ich leihe Heißluftballon", "img_alat_14",
+					"sound_alat_14", "udara", "alat"));
+			
+			//inisialisasi progress
+			dh.addProgress(new ProgressModel(0, 0, 0, 0));
 
 			return null;
 		}
