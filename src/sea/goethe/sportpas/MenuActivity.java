@@ -4,13 +4,13 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 public class MenuActivity extends ActionBarActivity {
-	private ImageButton btnLearn, btnGame, btnAbout, btnProgress;
+	private ImageButton btnLearn, btnGame, btnProgress,btnReward;
+	private Button btnAbout;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -19,8 +19,9 @@ public class MenuActivity extends ActionBarActivity {
 
 		btnLearn = (ImageButton) findViewById(R.id.btnLearn);
 		btnGame = (ImageButton) findViewById(R.id.btnGame);
-		btnAbout = (ImageButton) findViewById(R.id.btnAbout);
+		btnAbout = (Button) findViewById(R.id.btnAbout);
 		btnProgress = (ImageButton) findViewById(R.id.btnProgress);
+		btnReward = (ImageButton)findViewById(R.id.btnReward);
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
 		toolbar.setTitle("Wilkommen zu SportSpaﬂ");
@@ -72,25 +73,24 @@ public class MenuActivity extends ActionBarActivity {
 				overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
 			}
 		});
+		
+		btnReward.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent(MenuActivity.this, RewardActivity.class);
+				startActivity(i);
+				overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
+			}
+		});
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.menu, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+		overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
 	}
 	
 	

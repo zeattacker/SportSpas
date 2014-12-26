@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@drawable/bg_pattern"
+    android:background="@drawable/bg_pattern_2"
     android:id="@+id/linWelcome" >
     
     <!-- Toolbar -->

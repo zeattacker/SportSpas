@@ -2,11 +2,9 @@ package sea.goethe.sportpas.lib;
 
 import sea.goethe.sportpas.MenuActivity;
 import sea.goethe.sportpas.R;
-import sea.goethe.sportspas.model.HorenQuizModel;
 import sea.goethe.sportspas.model.LearnModel;
 import sea.goethe.sportspas.model.MultipleQuizModel;
 import sea.goethe.sportspas.model.ProgressModel;
-import sea.goethe.sportspas.model.TFQuizModel;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -103,72 +101,62 @@ public class WelcomeAdapter extends PagerAdapter {
 			// TODO Auto-generated method stub
 
 			// Multiple Choice Gambar
-			dh.addMP(new MultipleQuizModel("Fußball", "10", "img_sport_7",
-					"img_alat_5", "img_alat_2", "img_sport_4", 0, "gambar"));
-			dh.addMP(new MultipleQuizModel("Surfbrett", "10", "img_alat_3",
-					"img_sport_3", "img_sport_1", "img_sport_4", 3, "gambar"));
-			dh.addMP(new MultipleQuizModel("Laufen", "10", "img_alat_3",
-					"img_sport_2", "img_alat_7", "img_alat_5", 1, "gambar"));
-			dh.addMP(new MultipleQuizModel("Schwimmen", "10", "img_alat_3",
-					"img_sport_5", "img_sport_3", "img_alat_8", 1, "gambar"));
-			dh.addMP(new MultipleQuizModel("Tennis", "10", "img_sport_6",
-					"img_alat_5", "img_sport_1", "img_alat_3", 0, "gambar"));
-			dh.addMP(new MultipleQuizModel("Schrimmbrille", "10",
-					"img_sport_7", "img_sport_8", "img_alat_5", "img_alat_6",
-					2, "gambar"));
-			dh.addMP(new MultipleQuizModel("Schach", "10", "img_alat_4",
-					"img_alat_7", "img_alat_2", "img_sport_3", 3, "gambar"));
-			dh.addMP(new MultipleQuizModel("Surfen", "10", "img_alat_3",
-					"img_alat_1", "img_sport_4", "img_sport_3", 2, "gambar"));
-			dh.addMP(new MultipleQuizModel("Federballschläger", "10",
-					"img_sport_5", "img_alat_8", "img_alat_7", "img_sport_2",
-					1, "gambar"));
-			dh.addMP(new MultipleQuizModel("Lauf-schuhe", "10", "img_alat_2",
-					"img_sport_1", "img_sport_8", "img_alat_5", 0, "gambar"));
-
-			// Multiple Choice Text
-			dh.addMP(new MultipleQuizModel("img_sport_4", "10", "Schach",
-					"Laufschuhe", "Surfen", "Surfbretter", 2, "text"));
-			dh.addMP(new MultipleQuizModel("img_sport_4", "10", "Schach",
-					"Laufschuhe", "Surfen", "Surfbretter", 2, "text"));
-			dh.addMP(new MultipleQuizModel("img_sport_4", "10", "Schach",
-					"Laufschuhe", "Surfen", "Surfbretter", 2, "text"));
-			dh.addMP(new MultipleQuizModel("img_sport_6", "10", "Laufschuhe",
-					"Basketball", "Laufen", "Tennis", 3, "text"));
-			dh.addMP(new MultipleQuizModel("img_sport_6", "10", "Laufschuhe",
-					"Basketball", "Laufen", "Tennis", 3, "text"));
-			dh.addMP(new MultipleQuizModel("img_sport_6", "10", "Laufschuhe",
-					"Basketball", "Laufen", "Tennis", 3, "text"));
-			dh.addMP(new MultipleQuizModel("img_alat_1", "10", "Federball",
-					"Rennfahren", "Ball", "Laufen", 0, "text"));
-			dh.addMP(new MultipleQuizModel("img_alat_1", "10", "Federball",
-					"Rennfahren", "Ball", "Laufen", 0, "text"));
-			dh.addMP(new MultipleQuizModel("img_alat_1", "10", "Federball",
-					"Rennfahren", "Ball", "Laufen", 0, "text"));
-			dh.addMP(new MultipleQuizModel("img_sport_4", "10", "Schach",
-					"Laufschuhe", "Surfen", "Surfbretter", 2, "text"));
-
-			// True Or False Text
-			dh.addTF(new TFQuizModel("img_alat_7", "Ball für Fußball genutzt",
-					0));
-			dh.addTF(new TFQuizModel("img_alat_7",
-					"Ball für Fußball genutzt 2", 0));
-			dh.addTF(new TFQuizModel("img_sport_5", "Das Spiel Fußball 3", 1));
-			dh.addTF(new TFQuizModel("img_sport_5", "Das Spiel Fußball 4", 1));
-			dh.addTF(new TFQuizModel("img_alat_7",
-					"Ball für Fußball genutzt 5", 0));
-			dh.addTF(new TFQuizModel("img_alat_7",
-					"Ball für Fußball genutzt 6", 0));
-			dh.addTF(new TFQuizModel("img_sport_5", "Das Spiel Fußball", 1));
-			dh.addTF(new TFQuizModel("img_sport_5", "Das Spiel Fußball 8", 1));
-			dh.addTF(new TFQuizModel("img_alat_7",
-					"Ball für Fußball genutzt 9", 0));
-			dh.addTF(new TFQuizModel("img_sport_5", "Das Spiel Fußball 10", 1));
-
-			// Horen Text
-			dh.addHoren(new HorenQuizModel("soal_horen_1", "A"));
-			dh.addHoren(new HorenQuizModel("soal_horen_1", "B"));
-			dh.addHoren(new HorenQuizModel("soal_horen_1", "C"));
+			dh.addMP(new MultipleQuizModel("das Radfahren", "10", "img_sport_1",
+					"img_sport_6", "img_sport_15", "img_alat_7", 2, "darat"));
+			dh.addMP(new MultipleQuizModel("das Schach", "10", "img_sport_7",
+					"img_sport_3", "img_alat_2", "img_alat_1", 1, "darat"));
+			dh.addMP(new MultipleQuizModel("der Tennisschläger", "10", "img_alat_4",
+					"img_sport_8", "img_sport_2", "img_alat_6", 3, "darat"));
+			dh.addMP(new MultipleQuizModel("der Volleyball", "10", "img_alat_15",
+					"img_alat_2", "img_sport_7", "img_sport_8", 3, "darat"));
+			dh.addMP(new MultipleQuizModel("der Basketball", "10", "img_sport_1",
+					"img_alat_16", "img_alat_17", "img_alat_18", 0, "darat"));
+			dh.addMP(new MultipleQuizModel("img_sport_6", "10", "der Tennischläger",
+					"das Tennis", "der Tennisplatz", "das Surfbrett", 1, "darat"));
+			dh.addMP(new MultipleQuizModel("img_alat_2", "10", "Stick Golf",
+					"Schwimmen", "Laufschuhe", "das Laufen", 2, "darat"));
+			dh.addMP(new MultipleQuizModel("img_alat_1", "10", "der Federball",
+					"der Ball", "der Federballschläger", "Rennhelm", 0, "darat"));
+			dh.addMP(new MultipleQuizModel("img_alat_3", "10", "Fußballplatz",
+					"das Schachbrett", "das Surfbrett", "dass Schach", 1, "darat"));
+			dh.addMP(new MultipleQuizModel("img_alat_18", "10", "Basketball",
+					"Basketballkorb", "Lauffeld", "Tennischläger", 1, "darat"));
+			
+			//air
+			dh.addMP(new MultipleQuizModel("die Flößerei", "10", "img_sport_9",
+					"img_sport_4", "img_sport_11", "img_sport_10", 3, "air"));
+			dh.addMP(new MultipleQuizModel("das Schwimmen", "10", "img_sport_5",
+					"img_alat_9", "img_alat_5", "img_alat_11", 0, "air"));
+			dh.addMP(new MultipleQuizModel("das Surfen", "10", "img_alat_4",
+					"img_sport_4", "img_alat_10", "img_sport_9", 1, "air"));
+			dh.addMP(new MultipleQuizModel("img_alat_10", "10", "Schnorcheln",
+					"Badeanzug", "Paddel", "Surfbrett", 1, "air"));
+			dh.addMP(new MultipleQuizModel("img_sport_9", "10", "Rettungsweste",
+					"Schrimbrille", "Jetski", "Schwimmen", 2, "air"));
+			dh.addMP(new MultipleQuizModel("img_alat_11", "10", "die Rettungsweste",
+					"der Rettungsweste", "das Rettungsweste", "du Rettungsweste", 0, "air"));
+			dh.addMP(new MultipleQuizModel("img_alat_9", "10", "du Paddle",
+					"der Paddle", "die Paddle", "das Paddle", 3, "air"));
+			dh.addMP(new MultipleQuizModel("img_alat_11", "10", "ob Rettungsweste zum Schwimmen ?",
+					"", "", "", 0, "air"));
+			dh.addMP(new MultipleQuizModel("img_alat_9", "10", "ob Paddle zum Surfen ?",
+					"", "", "", 1, "air"));
+			dh.addMP(new MultipleQuizModel("img_alat_5", "10", "ob Schrimbrille zum Schach ?",
+					"", "", "", 1, "air"));
+			
+			//udara
+			dh.addMP(new MultipleQuizModel("das Gleitschirmfliegen", "20", "img_sport_3",
+					"img_alat_13", "img_sport_13", "img_alat_14", 2, "udara"));
+			dh.addMP(new MultipleQuizModel("img_alat_12", "20", "das Gleitschirmfliegen",
+					"der Heißluftballon", "der Flugzeug", "das Segelflugzeug", 0, "udara"));
+			dh.addMP(new MultipleQuizModel("img_alat_14", "20", "ob Heißluftballon zum Luft ?",
+					"", "", "", 0, "udara"));
+			dh.addMP(new MultipleQuizModel("das Segelflugzeug", "10", "Ich bin ein Pilot",
+					"Ich Spiele Luftballon", "", "", 0, "udara"));
+			dh.addMP(new MultipleQuizModel("der Flugzeug", "10", "",
+					"", "", "", 0, "udara"));
+			dh.addMP(new MultipleQuizModel("Ich bestieg das Flugzeug", "10", "",
+					"", "", "", 0, "udara"));
 
 			// Add learn Sport
 			dh.addLearn(new LearnModel("der Basketball", "Ich Spiele Basketball", "img_sport_1",
@@ -189,7 +177,7 @@ public class WelcomeAdapter extends PagerAdapter {
 					"sound_sport_8", "darat", "sport"));
 			dh.addLearn(new LearnModel("das Jet Ski", "Ich Spiele Jet Ski", "img_sport_9",
 					"sound_sport_9", "air", "sport"));
-			dh.addLearn(new LearnModel("das Flößerei", "Ich bin Flößerei", "img_sport_10",
+			dh.addLearn(new LearnModel("die Flößerei", "Ich bin Flößerei", "img_sport_10",
 					"sound_sport_10", "air", "sport"));
 			dh.addLearn(new LearnModel("das Schnorcheln", "Ich bin Schnorcheln", "img_sport_11",
 					"sound_sport_11", "air", "sport"));
@@ -217,11 +205,11 @@ public class WelcomeAdapter extends PagerAdapter {
 					"sound_alat_7", "darat", "alat"));
 			dh.addLearn(new LearnModel("der Federballschläger", "Ich leihe Federballschläger",
 					"img_alat_8", "sound_alat_8", "darat", "alat"));
-			dh.addLearn(new LearnModel("das Ruder", "ich kaufe Ruder", "img_alat_9",
+			dh.addLearn(new LearnModel("das Paddel", "ich kaufe Paddel", "img_alat_9",
 					"sound_alat_9", "air", "alat"));
 			dh.addLearn(new LearnModel("der Badeanzug", "Ich kaufe Badeanzug", "img_alat_10",
 					"sound_alat_10", "air", "alat"));
-			dh.addLearn(new LearnModel("der Schwimmgürtel", "Ich leihe Schwimmer", "img_alat_11",
+			dh.addLearn(new LearnModel("die Rettungsweste", "Ich leihe Rettungsweste", "img_alat_11",
 					"sound_alat_11", "air", "alat"));
 			dh.addLearn(new LearnModel("das Segelflugzeug", "ich kaufe Segelflugzeug", "img_alat_12",
 					"sound_alat_12", "udara", "alat"));

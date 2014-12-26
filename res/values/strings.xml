@@ -44,5 +44,6 @@
     <string name="title_activity_learn_tab">LearnTabActivity</string>
     <string name="title_activity_read_quiz">ReadQuiz</string>
     <string name="title_activity_select_quiz">SelectQuiz</string>
+    <string name="title_activity_reward">RewardActivity</string>
 
 </resources>

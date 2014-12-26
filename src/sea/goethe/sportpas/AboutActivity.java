@@ -14,4 +14,11 @@ public class AboutActivity extends ActionBarActivity {
 		Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
 		toolbar.setTitle("About");
 	}
+	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+		overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
+	}
 }

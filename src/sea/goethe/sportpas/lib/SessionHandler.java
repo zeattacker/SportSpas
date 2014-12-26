@@ -60,11 +60,11 @@ public class SessionHandler {
 	}
 
 	public void createQuizSession(String type){
-		if(type.equalsIgnoreCase("land")){
+		if(type.equalsIgnoreCase("darat")){
 			editor.putBoolean(KEY_QUIZ_LAND, true);
-		} else if(type.equalsIgnoreCase("wasser")){
+		} else if(type.equalsIgnoreCase("air")){
 			editor.putBoolean(KEY_QUIZ_WASSER, true);
-		} else {
+		} else if(type.equalsIgnoreCase("udara")){
 			editor.putBoolean(KEY_QUIZ_LUFT, true);
 		}
 		

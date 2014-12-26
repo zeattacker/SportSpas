@@ -70,6 +70,10 @@
             android:name=".SelectQuiz"
             android:label="@string/title_activity_select_quiz" >
         </activity>
+        <activity
+            android:name=".RewardActivity"
+            android:label="@string/title_activity_reward" >
+        </activity>
     </application>
 
 </manifest>

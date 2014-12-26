@@ -32,4 +32,11 @@ public class SelectQuiz extends ActionBarActivity {
 		lIndicator = (LinePageIndicator)findViewById(R.id.indicator);
 		lIndicator.setViewPager(viewPager);
 	}
+	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+		overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
+	}
 }

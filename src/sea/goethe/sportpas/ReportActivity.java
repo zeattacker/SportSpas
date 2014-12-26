@@ -123,4 +123,11 @@ public class ReportActivity extends ActionBarActivity {
 		
 		return hasil;
 	}
+	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+		overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
+	}
 }

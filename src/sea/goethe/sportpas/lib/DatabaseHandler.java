@@ -3,12 +3,10 @@ package sea.goethe.sportpas.lib;
 import java.util.ArrayList;
 import java.util.List;
 
-import sea.goethe.sportspas.model.HorenQuizModel;
 import sea.goethe.sportspas.model.LearnModel;
 import sea.goethe.sportspas.model.MultipleQuizModel;
 import sea.goethe.sportspas.model.ProgressModel;
 import sea.goethe.sportspas.model.ScoreModel;
-import sea.goethe.sportspas.model.TFQuizModel;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -303,112 +301,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		Cursor cursor = db.rawQuery(selectQuery, null);
 		row = cursor.getCount();
 		return row;
-	}
-
-	// True False DAO
-	public void addTF(TFQuizModel tqm) {
-		SQLiteDatabase db = this.getWritableDatabase();
-
-		ContentValues cv = new ContentValues();
-		cv.put(KEY_GAMBAR, tqm.getGambar());
-		cv.put(KEY_SOAL, tqm.getSoal());
-		cv.put(KEY_BENAR, tqm.getJawaban());
-
-		db.insert(TBL_TRUEFALSE, null, cv);
-		db.close();
-	}
-
-	public void updateTF(TFQuizModel tqm) {
-		SQLiteDatabase db = this.getWritableDatabase();
-
-		ContentValues cv = new ContentValues();
-		cv.put(KEY_GAMBAR, tqm.getGambar());
-		cv.put(KEY_SOAL, tqm.getSoal());
-		cv.put(KEY_BENAR, tqm.getJawaban());
-
-		db.update(TBL_TRUEFALSE, cv, KEY_ID + " = ?",
-				new String[] { String.valueOf(tqm.getID()) });
-	}
-
-	public List<TFQuizModel> getAllTF() {
-		ArrayList<TFQuizModel> tfQuizList = new ArrayList<TFQuizModel>();
-		String selectQuery = "SELECT  * FROM " + TBL_TRUEFALSE;
-
-		SQLiteDatabase db = this.getWritableDatabase();
-		Cursor cursor = db.rawQuery(selectQuery, null);
-
-		// looping through all rows and adding to list
-		if (cursor.moveToFirst()) {
-			do {
-				TFQuizModel tfQuiz = new TFQuizModel();
-				tfQuiz.setID(cursor.getInt(0));
-				tfQuiz.setGambar(cursor.getString(1));
-				tfQuiz.setSoal(cursor.getString(2));
-				tfQuiz.setJawaban(cursor.getInt(3));
-				// Adding contact to list
-
-				tfQuizList.add(tfQuiz);
-			} while (cursor.moveToNext());
-		}
-
-		// return contact list
-		return tfQuizList;
-	}
-
-	public int countRowTF() {
-		int row = 0;
-		String selectQuery = "SELECT  * FROM " + TBL_TRUEFALSE;
-		SQLiteDatabase db = this.getWritableDatabase();
-		Cursor cursor = db.rawQuery(selectQuery, null);
-		row = cursor.getCount();
-		return row;
-	}
-
-	// Horen DAO
-	public void addHoren(HorenQuizModel hqa) {
-		SQLiteDatabase db = this.getWritableDatabase();
-
-		ContentValues cv = new ContentValues();
-		cv.put(KEY_MUSIC, hqa.getMusic());
-		cv.put(KEY_BENAR, hqa.getJawaban());
-
-		db.insert(TBL_HOREN, null, cv);
-		db.close();
-	}
-
-	public void updateHoren(HorenQuizModel hqa) {
-		SQLiteDatabase db = this.getWritableDatabase();
-
-		ContentValues cv = new ContentValues();
-		cv.put(KEY_MUSIC, hqa.getMusic());
-		cv.put(KEY_BENAR, hqa.getJawaban());
-
-		db.update(TBL_HOREN, cv, KEY_ID + " = ?",
-				new String[] { String.valueOf(hqa.getID()) });
-	}
-
-	public List<HorenQuizModel> getAllHoren() {
-		ArrayList<HorenQuizModel> horenQuizList = new ArrayList<HorenQuizModel>();
-		String selectQuery = "SELECT  * FROM " + TBL_HOREN;
-
-		SQLiteDatabase db = this.getWritableDatabase();
-		Cursor cursor = db.rawQuery(selectQuery, null);
-
-		// looping through all rows and adding to list
-		if (cursor.moveToFirst()) {
-			do {
-				HorenQuizModel horenQuiz = new HorenQuizModel();
-				horenQuiz.setID(cursor.getInt(0));
-				horenQuiz.setMusic(cursor.getString(1));
-				horenQuiz.setJawaban(cursor.getString(2));
-				// Adding contact to list
-
-				horenQuizList.add(horenQuiz);
-			} while (cursor.moveToNext());
-		}
-
-		// return contact list
-		return horenQuizList;
 	}
 
 	// Learn DAO

@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class SelectQuizAdapter extends PagerAdapter {
 	private LayoutInflater inflater;
@@ -65,22 +64,28 @@ public class SelectQuizAdapter extends PagerAdapter {
 		
 		
 		if(position == 0){
-			imgQuiz.setBackgroundResource(gambarQuiz[position]);
+			imgQuiz.setBackgroundResource(gambarQuiz[0]);
 			btnPlay.setBackgroundResource(R.drawable.bg_btn_select_quiz);
 			btnPlay.setEnabled(true);
-		} else {
+		} else if(position == 1){
 			if(sh.isLandDone()){
-				imgQuiz.setBackgroundResource(gambarQuiz[position]);
-				btnPlay.setBackgroundResource(R.drawable.bg_btn_select_quiz_disabled);
-				btnPlay.setEnabled(false);
-			} else if(sh.isWasserDone()){
-				imgQuiz.setBackgroundResource(gambarQuiz[position]);
-				btnPlay.setBackgroundResource(R.drawable.bg_btn_select_quiz_disabled);
-				btnPlay.setEnabled(false);
-			} else {
-				imgQuiz.setBackgroundResource(gambarlockQuiz[position]);
+				imgQuiz.setBackgroundResource(gambarQuiz[1]);
 				btnPlay.setBackgroundResource(R.drawable.bg_btn_select_quiz);
 				btnPlay.setEnabled(true);
+			}  else {
+				imgQuiz.setBackgroundResource(gambarlockQuiz[1]);
+				btnPlay.setBackgroundResource(R.drawable.bg_btn_select_quiz_disabled);
+				btnPlay.setEnabled(false);
+			}
+		} else {
+			if(sh.isWasserDone()){
+				imgQuiz.setBackgroundResource(gambarQuiz[2]);
+				btnPlay.setBackgroundResource(R.drawable.bg_btn_select_quiz);
+				btnPlay.setEnabled(true);
+			} else {
+				imgQuiz.setBackgroundResource(gambarlockQuiz[2]);
+				btnPlay.setBackgroundResource(R.drawable.bg_btn_select_quiz_disabled);
+				btnPlay.setEnabled(false);
 			}
 		}
 		textJudulQuiz.setText(judulQuiz[position]);
@@ -91,14 +96,13 @@ public class SelectQuizAdapter extends PagerAdapter {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				if(position == 0){
-					Intent i = new Intent(activity, TipePertama.class);
-					activity.startActivity(i);
+					movetoQuiz("darat");
 				} else if(position == 1){
 					//pindah ke laut
-					Toast.makeText(activity, "Coming Soon", Toast.LENGTH_SHORT).show();
+					movetoQuiz("air");
 				} else {
 					// pindah ke udara
-					Toast.makeText(activity, "Coming Soon", Toast.LENGTH_SHORT).show();
+					movetoQuiz("udara");
 				}
 			}
 		});
@@ -106,5 +110,12 @@ public class SelectQuizAdapter extends PagerAdapter {
 		((ViewPager) container).addView(convertView);
 
 		return convertView;
+	}
+	
+	private void movetoQuiz(String tipe){
+		Intent i = new Intent(activity, TipePertama.class);
+		i.putExtra("TIPEQUIZ", tipe);
+		activity.startActivity(i);
+		activity.finish();
 	}
 }
